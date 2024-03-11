@@ -32,7 +32,6 @@ public class RoomController {
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error al crear la sala: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
     @GetMapping(value ="/list")

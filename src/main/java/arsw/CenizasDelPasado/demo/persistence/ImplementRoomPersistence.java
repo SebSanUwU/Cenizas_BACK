@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class ImplementRoomPersistence implements RoomPersistence{
+public class ImplementRoomPersistence{
     public final Map<String,Room> listRoom = new HashMap<>();
 
     public ImplementRoomPersistence() {
         //NOT IMPLEMENTED
     }
 
-    @Override
+
     public void saveRoom(Room room) throws CenizasDelPasadpException {
         if(listRoom.containsKey(room.getCode())){
             throw new CenizasDelPasadpException("otra");
@@ -24,7 +24,7 @@ public class ImplementRoomPersistence implements RoomPersistence{
         }
     }
 
-    @Override
+
     public Room getRoom(String code) throws CenizasDelPasadpException {
         if(listRoom.containsKey(code)){
             return listRoom.get(code);
@@ -33,7 +33,7 @@ public class ImplementRoomPersistence implements RoomPersistence{
         }
     }
 
-    @Override
+
     public Map<String,Room> getAllRooms()  {
         return  listRoom;
     }

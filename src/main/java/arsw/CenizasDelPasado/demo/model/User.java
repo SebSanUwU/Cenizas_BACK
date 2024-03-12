@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 import java.util.List;
-import java.util.Objects;
 
 @Document("User")
 public class User {
@@ -17,9 +16,9 @@ public class User {
     private String mail;
     private GameStats gameStats;
     private List<String> friends;
-    private List<String> rooms;
+    private List<Long> rooms;
 
-    public User(Long ID, String nickname, String mail, GameStats gameStats, List<String> friends, List<String> rooms) {
+    public User(Long ID, String nickname, String mail, GameStats gameStats, List<String> friends, List<Long> rooms) {
         this.ID = ID;
         this.nickname = nickname;
         this.mail = mail;
@@ -68,11 +67,11 @@ public class User {
         this.friends = friends;
     }
 
-    public List<String> getRooms() {
+    public List<Long> getRooms() {
         return rooms;
     }
 
-    public void setRooms(List<String> rooms) {
+    public void setRooms(List<Long> rooms) {
         this.rooms = rooms;
     }
 

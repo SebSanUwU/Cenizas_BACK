@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping(value = "/room")
+@RequestMapping(value = "/v1/room")
 public class RoomController {
     @Autowired
     RoomService rs;

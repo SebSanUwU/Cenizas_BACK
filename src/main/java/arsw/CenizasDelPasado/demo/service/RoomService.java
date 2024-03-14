@@ -112,17 +112,19 @@ public class RoomService {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         String code = "";
         try {
-            while (true){
+            do {
+                code = "";
                 for (int i = 0; i < 7; i++) {
                     int indice = random.nextInt(caracteres.length());
                     char caracter = caracteres.charAt(indice);
                     code += caracter;
                 }
                 verifyRoomExists(code);
-            }
+            } while (verifyRoomExistsBreak(code));
         } catch (RoomException e) {
             return code;
         }
+        return code;
     }
 
     public void verifyRoomExists(String code) throws RoomException{
@@ -132,10 +134,20 @@ public class RoomService {
         }
     }
 
+    public boolean verifyRoomExistsBreak(String code) throws RoomException{
+        Room room = roomRepository.getRoomByCode(code);
+        if (room == null){
+            return false;
+        }
+        return true;
+    }
+
     public void verifyRoomExists(Long id) throws RoomException{
         Room roomById = roomRepository.getRoomById(id);
         if(roomById == null){
             throw new RoomException("Room not found by: "+id);
         }
     }
+
+
 }

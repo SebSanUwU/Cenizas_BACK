@@ -16,9 +16,9 @@ public class User {
     private String mail;
     private GameStats gameStats;
     private List<String> friends;
-    private List<Long> rooms;
+    private List<String> rooms;
 
-    public User(Long ID, String nickname, String mail, GameStats gameStats, List<String> friends, List<Long> rooms) {
+    public User(Long ID, String nickname, String mail, GameStats gameStats, List<String> friends, List<String> rooms) {
         this.ID = ID;
         this.nickname = nickname;
         this.mail = mail;
@@ -67,11 +67,11 @@ public class User {
         this.friends = friends;
     }
 
-    public List<Long> getRooms() {
+    public List<String> getRooms() {
         return rooms;
     }
 
-    public void setRooms(List<Long> rooms) {
+    public void setRooms(List<String> rooms) {
         this.rooms = rooms;
     }
 

@@ -1,21 +1,26 @@
 package arsw.CenizasDelPasado.demo.model;
 
+import arsw.CenizasDelPasado.demo.model.enemys.Enemy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document("Level")
-public class Level {
+public class LevelGame {
     @Id
     private Long ID;
     private String name;
     private int num_objects;
     private boolean complete;
+    private List<Enemy> enemies;
 
-    public Level(Long ID, String name, int num_objects, boolean complete) {
+    public LevelGame(Long ID, String name, int num_objects, boolean complete, List<Enemy> enemies) {
         this.ID = ID;
         this.name = name;
         this.num_objects = num_objects;
         this.complete = complete;
+        this.enemies = enemies;
     }
 
     public Long getID() {
@@ -50,13 +55,11 @@ public class Level {
         this.complete = complete;
     }
 
-    @Override
-    public String toString() {
-        return "Level{" +
-                "ID=" + ID +
-                ", name='" + name + '\'' +
-                ", num_objects=" + num_objects +
-                ", complete=" + complete +
-                '}';
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public void setEnemies(List<Enemy> enemies) {
+        this.enemies = enemies;
     }
 }

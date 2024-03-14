@@ -9,9 +9,4 @@
 
     <context:component-scan base-package="arsw.CenizasDelPasado.demo" />
 
-    <!-- Configuración de BlueprintServices con inyección de dependencias -->
-    <bean id="roomService" class="arsw.CenizasDelPasado.demo.service.RoomService">
-        <constructor-arg ref="InplementRoomPersistence"/>
-    </bean>
-
 </beans>

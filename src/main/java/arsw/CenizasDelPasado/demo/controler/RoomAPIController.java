@@ -74,6 +74,18 @@ public class RoomAPIController {
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
+    @PostMapping(value = "/create")
+    public ResponseEntity<?> createRoom(@RequestParam("server_name") String server_name){
+        try{
+            String code = roomService.generateCode();
+            Room room = new Room(server_name,code);
+            roomService.saveRoom(room);
+            return new ResponseEntity<>(code,HttpStatus.CREATED);
+        } catch(Exception ex){
+            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
     @PutMapping(value = "/{code}/new-code")
     public ResponseEntity<?> putRoomNewCode(@PathVariable("code") String code){
         try{

@@ -1,14 +1,19 @@
 package arsw.CenizasDelPasado.demo.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Document("User")
 public class User {
+
     @Id
     private Long ID;
     private String nickname;
@@ -18,6 +23,7 @@ public class User {
     private List<String> friends;
     private List<String> rooms;
 
+    @PersistenceCreator
     public User(Long ID, String nickname, String mail, GameStats gameStats, List<String> friends, List<String> rooms) {
         this.ID = ID;
         this.nickname = nickname;
@@ -25,6 +31,15 @@ public class User {
         this.gameStats = gameStats;
         this.friends = friends;
         this.rooms = rooms;
+    }
+
+    public User(String nickname, String mail) {
+        this.ID = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        this.nickname = nickname;
+        this.mail = mail;
+        this.gameStats = new GameStats(0,0,0,0,0);
+        this.friends = new ArrayList<>();
+        this.rooms = new ArrayList<>();
     }
 
     public Long getID() {

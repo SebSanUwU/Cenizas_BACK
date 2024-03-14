@@ -65,7 +65,7 @@ public class LevelService {
     //DELETE
     public void deleteLevel(Long id) throws LevelException{
         verifyLevelExists(id);
-        levelRepository.deleteLevelById(id);
+        levelRepository.deleteLevelByID(id);
     }
 
 

@@ -23,5 +23,5 @@ public interface LevelRepository extends MongoRepository<LevelGame, Long>{
     @Update("{ '$set' : { 'num_objects' : ?1 } }")
     void updateLevelNumObjects(Long id,int num_objects) throws LevelException;
 
-    void deleteLevelById(Long id) throws LevelException;
+    void deleteLevelByID(Long id) throws LevelException;
 }

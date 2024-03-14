@@ -1,13 +1,12 @@
 package arsw.CenizasDelPasado.demo.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Document("Room")
 public class Room {
@@ -22,9 +21,7 @@ public class Room {
     private RoomStats roomStats;
     private List<Long> levels;
 
-    public Room() {
-    }
-
+    @PersistenceCreator
     public Room(Long ID, String server_name, String code, Date creation_date, List<String> users_in_room, RoomStats roomStats, List<Long> levels) {
         this.ID = ID;
         this.server_name = server_name;
@@ -33,6 +30,16 @@ public class Room {
         this.users_in_room = users_in_room;
         this.roomStats = roomStats;
         this.levels = levels;
+    }
+
+    public Room(String server_name, String code) {
+        this.ID = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        this.server_name = server_name;
+        this.code = code;
+        this.creation_date = new Date();
+        this.users_in_room = new ArrayList<>(NUMBERPLAYERS);
+        this.roomStats = new RoomStats(0,0,0);
+        this.levels = new ArrayList<>();
     }
 
     public Long getID() {

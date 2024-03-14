@@ -4,6 +4,7 @@ import arsw.CenizasDelPasado.demo.persistence.LevelRepository;
 import arsw.CenizasDelPasado.demo.persistence.RoomRepository;
 import arsw.CenizasDelPasado.demo.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @EnableMongoRepositories
-public class CenizasDelPasadoApplication {
+public class CenizasDelPasadoApplication implements CommandLineRunner {
 	@Autowired
 	RoomRepository roomRepository;
 
@@ -36,5 +37,15 @@ public class CenizasDelPasadoApplication {
 				registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST","PUT", "DELETE");
 			}
 		};
+	}
+
+
+	@Override
+	public void run(String... args) throws Exception {
+		/*
+		roomRepository.deleteAll();
+		userRepository.deleteAll();
+		levelRepository.deleteAll();
+		*/
 	}
 }

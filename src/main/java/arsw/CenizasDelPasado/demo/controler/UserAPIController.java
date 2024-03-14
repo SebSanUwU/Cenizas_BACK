@@ -73,6 +73,17 @@ public class UserAPIController {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
+    @PostMapping(path = "/create")
+    public ResponseEntity<?> createNewUser(@RequestParam("mail") String mail,@RequestParam("nickname") String nickname){
+        try{
+            User user = new User(nickname,mail);
+            userService.saveUser(user);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch(Exception ex){
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
     @PutMapping(path = "/{mail}/update-nickname")
     public ResponseEntity<?> putUserNickname(@PathVariable("mail") String mail,@RequestParam("nickname") String nickname){
         try{

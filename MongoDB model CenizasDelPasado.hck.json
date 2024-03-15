@@ -22,6 +22,14 @@
                     "error": {}
                 },
                 {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "60df4c32-c175-4058-8c13-f5e109b15c2d",
+                    "name": "Nickname",
+                    "error": {}
+                },
+                {
                     "name": "GameStats",
                     "hackoladeMeta": {},
                     "isActivated": true,
@@ -57,6 +65,14 @@
                             "type": "numeric",
                             "GUID": "af7be72c-12b9-4167-9ac9-cfb36aa8fb71",
                             "name": "num_deaths",
+                            "error": {}
+                        },
+                        {
+                            "name": "games_played",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "numeric",
+                            "GUID": "074ac1a3-9205-4c10-8ad9-26e2659f35da",
                             "error": {}
                         }
                     ],
@@ -145,6 +161,23 @@
                 {
                     "hackoladeMeta": {},
                     "isActivated": true,
+                    "type": "string",
+                    "GUID": "38899d35-9dd1-46ea-9ad9-9e6b4ac2709d",
+                    "name": "Code",
+                    "error": {}
+                },
+                {
+                    "name": "Creation_date",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "date",
+                    "primaryKey": false,
+                    "GUID": "8cae6f2c-d47d-4965-9e0a-27d84788cdcc",
+                    "error": {}
+                },
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
                     "type": "array",
                     "properties": [
                         {
@@ -152,7 +185,9 @@
                             "isActivated": true,
                             "type": "string",
                             "GUID": "2b0c7a47-3cb3-4711-b442-df2044c10fda",
-                            "arrayItem": true
+                            "arrayItem": true,
+                            "displayName": "mail",
+                            "error": {}
                         }
                     ],
                     "additionalItems": true,
@@ -200,31 +235,21 @@
                     "name": "Levels",
                     "hackoladeMeta": {},
                     "isActivated": true,
-                    "type": "document",
+                    "type": "array",
                     "properties": [
                         {
                             "hackoladeMeta": {},
                             "isActivated": true,
-                            "type": "document",
-                            "properties": [
-                                {
-                                    "hackoladeMeta": {},
-                                    "isActivated": true,
-                                    "type": "boolean",
-                                    "GUID": "dec63ebc-b87e-4358-ad21-464fc07c811f",
-                                    "name": "complete",
-                                    "error": {}
-                                }
-                            ],
-                            "additionalProperties": false,
-                            "GUID": "bcf3ceac-c600-4843-a35f-9f9e9590de40",
-                            "name": "level1",
-                            "error": {}
+                            "type": "objectId",
+                            "error": {},
+                            "GUID": "7c87f2ba-3597-48a8-a906-00231655690e",
+                            "arrayItem": true,
+                            "displayName": "Level"
                         }
                     ],
-                    "additionalProperties": false,
-                    "GUID": "c2335435-a44d-4a69-a6fa-b1175c87628d",
-                    "error": {}
+                    "additionalItems": true,
+                    "error": {},
+                    "GUID": "c2335435-a44d-4a69-a6fa-b1175c87628d"
                 }
             ],
             "definitions": {
@@ -246,6 +271,112 @@
             },
             "GUID": "3438e581-b28b-4bc6-b6a5-6ac1fc5e7d90",
             "bucketId": "52584b26-114e-4a75-98dc-2110dbc9ff55"
+        },
+        {
+            "collectionName": "Level",
+            "type": "object",
+            "properties": [
+                {
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "objectId",
+                    "GUID": "54cf95a8-6949-41f0-9184-5e2d82c00a6f",
+                    "name": "ID",
+                    "error": {}
+                },
+                {
+                    "name": "Name",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "string",
+                    "GUID": "5c858477-4fe8-4d55-a132-4bc2c72c4917",
+                    "error": {}
+                },
+                {
+                    "name": "Num_objects",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "numeric",
+                    "GUID": "2f32d674-b09d-42ab-87b1-cabce261587c",
+                    "error": {}
+                },
+                {
+                    "name": "Complete",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "boolean",
+                    "GUID": "bd386af8-322d-42d3-b297-d699ea7c00e0",
+                    "error": {}
+                },
+                {
+                    "name": "Enemys",
+                    "hackoladeMeta": {},
+                    "isActivated": true,
+                    "type": "document",
+                    "properties": [
+                        {
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "num",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "numeric",
+                                    "GUID": "324674cb-b3a9-4006-ad7e-cd81a61caace",
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "GUID": "d1bb5eee-8636-4ea3-a528-fac946c3c3e2",
+                            "name": "name_enemy1",
+                            "error": {}
+                        },
+                        {
+                            "name": "name_enemy2",
+                            "hackoladeMeta": {},
+                            "isActivated": true,
+                            "type": "document",
+                            "properties": [
+                                {
+                                    "name": "num",
+                                    "hackoladeMeta": {},
+                                    "isActivated": true,
+                                    "type": "numeric",
+                                    "GUID": "8e3c8ddf-6a80-4630-9717-73142396d21f",
+                                    "error": {}
+                                }
+                            ],
+                            "additionalProperties": false,
+                            "GUID": "046f06f4-2314-4c51-ade8-57f8a822dd00",
+                            "error": {}
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "error": {},
+                    "GUID": "c14b54e8-616d-45d7-84d1-cbac76eaae09"
+                }
+            ],
+            "definitions": {
+                "type": "definitions",
+                "properties": [],
+                "GUID": "a6d2a4a2-259c-452f-b8ab-f3f7d39ac293"
+            },
+            "isActivated": true,
+            "additionalProperties": false,
+            "validationLevel": "Off",
+            "validationAction": "Warn",
+            "storageEngineName": "WiredTiger",
+            "collectionUsers": [],
+            "indexes": [],
+            "collation": {},
+            "sharding": {
+                "unique": true,
+                "collation": "null"
+            },
+            "GUID": "56a92cbf-199e-401a-a902-6bc287eab6cf",
+            "bucketId": "52584b26-114e-4a75-98dc-2110dbc9ff55"
         }
     ],
     "buckets": [
@@ -254,7 +385,8 @@
             "type": "bucket",
             "collectionIds": [
                 "6a30885d-de8c-46bb-8f40-a7eb0e547304",
-                "3438e581-b28b-4bc6-b6a5-6ac1fc5e7d90"
+                "3438e581-b28b-4bc6-b6a5-6ac1fc5e7d90",
+                "56a92cbf-199e-401a-a902-6bc287eab6cf"
             ],
             "backgroundColor": {
                 "r": 216,
@@ -306,7 +438,21 @@
         "c2335435-a44d-4a69-a6fa-b1175c87628d": "Levels",
         "bcf3ceac-c600-4843-a35f-9f9e9590de40": "level1",
         "dec63ebc-b87e-4358-ad21-464fc07c811f": "complete",
-        "b58833c9-39d5-4854-9d31-76a547adbaed": "New Diagram View"
+        "b58833c9-39d5-4854-9d31-76a547adbaed": "New Diagram View",
+        "60df4c32-c175-4058-8c13-f5e109b15c2d": "Nickname",
+        "38899d35-9dd1-46ea-9ad9-9e6b4ac2709d": "Code",
+        "8cae6f2c-d47d-4965-9e0a-27d84788cdcc": "Creation_date",
+        "56a92cbf-199e-401a-a902-6bc287eab6cf": "Level",
+        "54cf95a8-6949-41f0-9184-5e2d82c00a6f": "ID",
+        "c14b54e8-616d-45d7-84d1-cbac76eaae09": "Enemys",
+        "d1bb5eee-8636-4ea3-a528-fac946c3c3e2": "name_enemy1",
+        "324674cb-b3a9-4006-ad7e-cd81a61caace": "num",
+        "046f06f4-2314-4c51-ade8-57f8a822dd00": "name_enemy2",
+        "8e3c8ddf-6a80-4630-9717-73142396d21f": "num",
+        "5c858477-4fe8-4d55-a132-4bc2c72c4917": "Name",
+        "074ac1a3-9205-4c10-8ad9-26e2659f35da": "games_played",
+        "2f32d674-b09d-42ab-87b1-cabce261587c": "Num_objects",
+        "bd386af8-322d-42d3-b297-d699ea7c00e0": "Complete"
     },
     "definitions": {
         "type": "definitions",
@@ -336,7 +482,7 @@
             "modelName": false
         }
     },
-    "lastModifTS": "2024-03-08T23:58:15.013Z",
+    "lastModifTS": "2024-03-11T20:35:09.782Z",
     "persistenceSchemaVersion": "7",
     "isCreatedByPlugin": true,
     "pluginInformation": {
@@ -351,18 +497,26 @@
                 "erd": [
                     {
                         "GUID": "6a30885d-de8c-46bb-8f40-a7eb0e547304",
-                        "x": 1298,
-                        "y": 1176,
+                        "x": 1305,
+                        "y": 1177,
                         "width": 272,
                         "height": 283,
                         "color": {}
                     },
                     {
                         "GUID": "3438e581-b28b-4bc6-b6a5-6ac1fc5e7d90",
-                        "x": 1300,
-                        "y": 1495,
-                        "width": 274,
-                        "height": 272,
+                        "x": 1307,
+                        "y": 1496,
+                        "width": 268,
+                        "height": 275,
+                        "color": {}
+                    },
+                    {
+                        "GUID": "56a92cbf-199e-401a-a902-6bc287eab6cf",
+                        "x": 1650,
+                        "y": 1378,
+                        "width": 261,
+                        "height": 198,
                         "color": {}
                     }
                 ],
@@ -374,12 +528,14 @@
                 },
                 "buckets": [
                     {
-                        "x": 1258,
-                        "y": 1136,
+                        "x": 1265,
+                        "y": 1137,
                         "GUID": "52584b26-114e-4a75-98dc-2110dbc9ff55"
                     }
                 ],
-                "collapsedNodes": [],
+                "collapsedNodes": [
+                    "56a92cbf-199e-401a-a902-6bc287eab6cfc14b54e8-616d-45d7-84d1-cbac76eaae09d1bb5eee-8636-4ea3-a528-fac946c3c3e2"
+                ],
                 "activeRelationship": "",
                 "activeRelationshipFields": {
                     "childField": [],
@@ -444,6 +600,11 @@
                         "autoWidth": false,
                         "autoHeight": false,
                         "GUID": "3438e581-b28b-4bc6-b6a5-6ac1fc5e7d90"
+                    },
+                    {
+                        "autoWidth": false,
+                        "autoHeight": false,
+                        "GUID": "56a92cbf-199e-401a-a902-6bc287eab6cf"
                     }
                 ],
                 "relationshipUpdateDisabled": false

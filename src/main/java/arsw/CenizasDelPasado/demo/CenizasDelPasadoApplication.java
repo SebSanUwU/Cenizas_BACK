@@ -47,5 +47,6 @@ public class CenizasDelPasadoApplication implements CommandLineRunner {
 		userRepository.deleteAll();
 		levelRepository.deleteAll();
 		*/
+
 	}
 }

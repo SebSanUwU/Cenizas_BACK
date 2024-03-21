@@ -53,7 +53,7 @@ public class UserAPIController {
     @GetMapping("/{mail}/friends")
     public ResponseEntity<?> getUserFriends(@PathVariable("mail") String mail){
         try {
-            return new ResponseEntity<>(userService.getUserFriends(mail), HttpStatus.FOUND);
+            return new ResponseEntity<>(userService.getUserFriends(mail), HttpStatus.ACCEPTED);
         } catch (Exception e) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -65,7 +65,7 @@ public class UserAPIController {
     @GetMapping("/{mail}/game-stats")
     public ResponseEntity<?> getUserGameStats(@PathVariable("mail") String mail){
         try {
-            return new ResponseEntity<>(userService.getUserGameStats(mail), HttpStatus.FOUND);
+            return new ResponseEntity<>(userService.getUserGameStats(mail), HttpStatus.ACCEPTED);
         } catch (UserException e) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -77,7 +77,7 @@ public class UserAPIController {
     @GetMapping("/{mail}/rooms")
     public ResponseEntity<?> getUserRooms(@PathVariable("mail") String mail){
         try {
-            return new ResponseEntity<>(userService.getUserRooms(mail), HttpStatus.FOUND);
+            return new ResponseEntity<>(userService.getUserRooms(mail), HttpStatus.ACCEPTED);
         } catch (UserException e) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -90,7 +90,7 @@ public class UserAPIController {
     public ResponseEntity<?> protocolPostUser(@RequestBody User user){
         try{
             userService.saveUser(user);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch(Exception ex){
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
@@ -104,7 +104,7 @@ public class UserAPIController {
         try{
             User user = new User(info.get("nickname"),info.get("mail"));
             userService.saveUser(user);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch(Exception ex){
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);

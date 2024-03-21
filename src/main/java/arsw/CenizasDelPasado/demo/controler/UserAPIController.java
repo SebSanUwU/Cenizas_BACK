@@ -100,9 +100,9 @@ public class UserAPIController {
     @ApiResponse(responseCode = "201", description = "Usuario creado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear el usuario", content = @Content)
     @PostMapping(path = "/create")
-    public ResponseEntity<?> createNewUser(@RequestBody Map<String, String> info){
+    public ResponseEntity<?> createNewUser(@PathVariable("mail") String mail,@RequestParam("nickname") String nickname){
         try{
-            User user = new User(info.get("nickname"),info.get("mail"));
+            User user = new User(mail,nickname);
             userService.saveUser(user);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch(Exception ex){

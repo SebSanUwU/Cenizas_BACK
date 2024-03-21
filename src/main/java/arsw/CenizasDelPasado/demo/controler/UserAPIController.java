@@ -2,6 +2,7 @@ package arsw.CenizasDelPasado.demo.controler;
 
 import arsw.CenizasDelPasado.demo.model.User;
 import arsw.CenizasDelPasado.demo.persistence.exception.UserException;
+import arsw.CenizasDelPasado.demo.persistence.exception.UserPersistenceException;
 import arsw.CenizasDelPasado.demo.service.UserService;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -98,9 +100,9 @@ public class UserAPIController {
     @ApiResponse(responseCode = "201", description = "Usuario creado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear el usuario", content = @Content)
     @PostMapping(path = "/create")
-    public ResponseEntity<?> createNewUser(@RequestParam("mail") String mail,@RequestParam("nickname") String nickname){
+    public ResponseEntity<?> createNewUser(@RequestBody Map<String, String> info){
         try{
-            User user = new User(nickname,mail);
+            User user = new User(info.get("nickname"),info.get("mail"));
             userService.saveUser(user);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch(Exception ex){
@@ -158,6 +160,25 @@ public class UserAPIController {
         } catch(Exception ex){
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+    @Operation(summary = "Inicia sesion de un usuario", description = "Este endpoint me premite revisar si un usuario ya existe, en caso de que no lo crea")
+    @ApiResponse(responseCode = "203", description = "Se inicio secion correctamente", content = @Content)
+    @ApiResponse(responseCode = "406", description = "No se pudo iniciar sesion", content = @Content)
+    @GetMapping("startSession")
+    public ResponseEntity<?> startSession(@RequestBody Map<String, String> user) throws UserException, UserPersistenceException {
+        try {
+            if (userService.getUser(user.get("mail")) != null) {
+                return new ResponseEntity<>(userService.getUser(user.get("mail")), HttpStatus.FOUND);
+            } else {
+                User newUser = new User(user.get(user.get("nickname")), user.get("mail"));
+                userService.saveUser(newUser);
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            }
+        }catch(UserPersistenceException e){
+            User newUser = new User(user.get("nickname"), user.get("mail"));
+            userService.saveUser(newUser);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
 }

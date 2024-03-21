@@ -40,7 +40,7 @@ public class RoomAPIController {
     @GetMapping(value = "/{code}")
     public ResponseEntity<?> getRoom(@PathVariable("code") String code) {
         try {
-            return new ResponseEntity<>(roomService.getRoom(code), HttpStatus.FOUND);
+            return new ResponseEntity<>(roomService.getRoom(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
@@ -52,7 +52,7 @@ public class RoomAPIController {
     @GetMapping(value = "/{code}/room-stats")
     public ResponseEntity<?> getRoomStats(@PathVariable("code") String code) {
         try {
-            return new ResponseEntity<>(roomService.getRoomStats(code), HttpStatus.FOUND);
+            return new ResponseEntity<>(roomService.getRoomStats(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
@@ -64,7 +64,7 @@ public class RoomAPIController {
     @GetMapping(value = "/{code}/users-in-room")
     public ResponseEntity<?> getRoomUsers(@PathVariable("code") String code) {
         try {
-            return new ResponseEntity<>(roomService.getRoomUsers(code), HttpStatus.FOUND);
+            return new ResponseEntity<>(roomService.getRoomUsers(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
@@ -76,7 +76,7 @@ public class RoomAPIController {
     @GetMapping(value = "/{code}/levels")
     public ResponseEntity<?> getRoomLevels(@PathVariable("code") String code) {
         try {
-            return new ResponseEntity<>(roomService.getRoomLevels(code), HttpStatus.FOUND);
+            return new ResponseEntity<>(roomService.getRoomLevels(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
@@ -89,7 +89,7 @@ public class RoomAPIController {
     public ResponseEntity<?> protocolPostRoom(@RequestBody Room room){
         try{
             roomService.saveRoom(room);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch(Exception ex){
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
@@ -104,7 +104,7 @@ public class RoomAPIController {
             String code = roomService.generateCode();
             Room room = new Room(server_name,code);
             roomService.saveRoom(room);
-            return new ResponseEntity<>(code,HttpStatus.CREATED);
+            return new ResponseEntity<>(new String[]{code},HttpStatus.ACCEPTED);
         } catch(Exception ex){
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);

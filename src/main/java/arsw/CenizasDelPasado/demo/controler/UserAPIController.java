@@ -102,7 +102,7 @@ public class UserAPIController {
     @PostMapping(path = "/create")
     public ResponseEntity<?> createNewUser(@RequestParam("nickname") String nickname,@RequestParam("mail") String mail){
         try{
-            User user = new User(mail,nickname);
+            User user = new User(nickname,mail);
             userService.saveUser(user);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch(Exception ex){

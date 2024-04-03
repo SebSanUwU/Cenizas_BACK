@@ -20,9 +20,10 @@ public class Room {
     private List<String> users_in_room;
     private RoomStats roomStats;
     private List<Long> levels;
+    private boolean isPublic;
 
     @PersistenceCreator
-    public Room(Long ID, String server_name, String code, Date creation_date, List<String> users_in_room, RoomStats roomStats, List<Long> levels) {
+    public Room(Long ID, String server_name, String code, Date creation_date, List<String> users_in_room, RoomStats roomStats, List<Long> levels, boolean isPublic) {
         this.ID = ID;
         this.server_name = server_name;
         this.code = code;
@@ -30,9 +31,10 @@ public class Room {
         this.users_in_room = users_in_room;
         this.roomStats = roomStats;
         this.levels = levels;
+        this.isPublic = isPublic;
     }
 
-    public Room(String server_name, String code) {
+    public Room(String server_name, String code, boolean isPublic) {
         this.ID = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         this.server_name = server_name;
         this.code = code;
@@ -40,6 +42,7 @@ public class Room {
         this.users_in_room = new ArrayList<>(NUMBERPLAYERS);
         this.roomStats = new RoomStats(0,0,0);
         this.levels = new ArrayList<>();
+        this.isPublic = isPublic;
     }
 
     public Long getID() {
@@ -56,6 +59,14 @@ public class Room {
 
     public void setServer_name(String server_name) {
         this.server_name = server_name;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
     }
 
     public String getCode() {
@@ -120,6 +131,7 @@ public class Room {
                 ", users_in_room=" + users_in_room +
                 ", roomStats=" + roomStats +
                 ", levels=" + levels +
+                ", isPublic=" + isPublic+
                 '}';
     }
 

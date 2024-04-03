@@ -2,7 +2,10 @@ package arsw.CenizasDelPasado.demo.controler;
 
 
 import arsw.CenizasDelPasado.demo.model.Room;
+import arsw.CenizasDelPasado.demo.model.User;
+import arsw.CenizasDelPasado.demo.persistence.exception.UserException;
 import arsw.CenizasDelPasado.demo.service.RoomService;
+import arsw.CenizasDelPasado.demo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,6 +24,9 @@ import java.util.logging.Logger;
 public class RoomAPIController {
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private UserService userService;
 
     @Operation(summary = "Obtener todas las salas", description = "Este endpoint devuelve una lista de todas las salas.")
     @ApiResponse(responseCode = "200", description = "Lista de salas", content = @Content)
@@ -64,7 +70,7 @@ public class RoomAPIController {
     @GetMapping(value = "/{code}/users-in-room")
     public ResponseEntity<?> getRoomUsers(@PathVariable("code") String code) {
         try {
-            return new ResponseEntity<>(roomService.getRoomUsers(code), HttpStatus.ACCEPTED);
+            return new ResponseEntity<List<String>>(roomService.getRoomUsers(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
@@ -89,7 +95,7 @@ public class RoomAPIController {
     public ResponseEntity<?> protocolPostRoom(@RequestBody Room room){
         try{
             roomService.saveRoom(room);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(room,HttpStatus.ACCEPTED);
         } catch(Exception ex){
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
@@ -99,11 +105,15 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "201", description = "Sala creada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear la sala", content = @Content)
     @PostMapping(value = "/create")
-    public ResponseEntity<?> createRoom(@RequestParam("server_name") String server_name){
+    public ResponseEntity<?> createRoom(@RequestParam("server_name") String server_name, @RequestParam("isPublic") boolean isPublic,@RequestParam("user_creator") String user){
         try{
             String code = roomService.generateCode();
-            Room room = new Room(server_name,code);
+            Room room = new Room(server_name,code,isPublic);
             roomService.saveRoom(room);
+            putRoomUsers(code,user);
+            List<String> userRooms = userService.getUserRooms(user);
+            userRooms.add(code);
+            userService.updateUserRooms(user,userRooms);
             return new ResponseEntity<>(new String[]{code},HttpStatus.ACCEPTED);
         } catch(Exception ex){
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,10 +149,19 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "202", description = "Usuarios de sala actualizados exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar los usuarios de la sala", content = @Content)
     @PutMapping(value = "/{code}/update-users")
-    public ResponseEntity<?> putRoomUsers(@PathVariable("code") String code, @RequestBody List<String> users){
+    public ResponseEntity<?> putRoomUsers(@PathVariable("code") String code, @RequestParam("user") String user){
         try{
-            roomService.updateRoomUsers(code,users);
+            List<String> users = (List<String>) getRoomUsers(code).getBody();
+            if(!users.contains(user)){
+                users.add(user);
+                roomService.updateRoomUsers(code,users);
+            }else{
+                throw new UserException("Usuario ya esta en la sala.");
+            }
+
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
+
+
         } catch(Exception ex){
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);

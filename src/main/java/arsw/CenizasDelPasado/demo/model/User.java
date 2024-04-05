@@ -22,6 +22,7 @@ public class User {
     private GameStats gameStats;
     private List<String> friends;
     private List<String> rooms;
+    private List<String> request;
 
     @PersistenceCreator
     public User(Long ID, String nickname, String mail, GameStats gameStats, List<String> friends, List<String> rooms) {
@@ -31,6 +32,7 @@ public class User {
         this.gameStats = gameStats;
         this.friends = friends;
         this.rooms = rooms;
+        this.request = new ArrayList<>();
     }
 
     public User(String nickname, String mail) {
@@ -40,6 +42,15 @@ public class User {
         this.gameStats = new GameStats(0,0,0,0,0);
         this.friends = new ArrayList<>();
         this.rooms = new ArrayList<>();
+        this.request = new ArrayList<>();
+    }
+
+    public List<String> getFriendsRequest() {
+        return request;
+    }
+
+    public void setFriendsRequest(List<String> friendsRequest) {
+        this.request = friendsRequest;
     }
 
     public Long getID() {
@@ -156,6 +167,7 @@ public class User {
         public void setGames_played(int games_played) {
             this.games_played = games_played;
         }
+
 
         @Override
         public String toString() {

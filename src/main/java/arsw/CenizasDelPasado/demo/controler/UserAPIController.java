@@ -181,4 +181,22 @@ public class UserAPIController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
+
+    @Operation(summary = "Mandar Solicitud de amistad", description = "Este endpoint me permite mandarle una solicitud de amistad a otro usuario")
+    @ApiResponse(responseCode ="203", description = "Se mando correctamente la solicitud")
+    @ApiResponse(responseCode = "406", description = "No se pudo enviar la solicitud correctamente")
+    @PostMapping(value = "/sendFriendRequest")
+    public ResponseEntity<?> sendFriendRequest(@RequestParam("user") String user,@RequestParam("friendMail") String friendMail){
+        try {
+            if (userService.getUser(user) != null || userService.getUser(friendMail) != null)  {
+                userService.updateUserFriendRequest(user,friendMail);
+                return new ResponseEntity<>( HttpStatus.ACCEPTED);
+            }else{
+                return new ResponseEntity<>("Usuario no existe", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }catch(UserException ex){
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 }

@@ -21,9 +21,10 @@ public class Room {
     private RoomStats roomStats;
     private List<Long> levels;
     private boolean isPublic;
+    private boolean online;
 
     @PersistenceCreator
-    public Room(Long ID, String server_name, String code, Date creation_date, List<String> users_in_room, RoomStats roomStats, List<Long> levels, boolean isPublic) {
+    public Room(Long ID, String server_name, String code, Date creation_date, List<String> users_in_room, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
         this.ID = ID;
         this.server_name = server_name;
         this.code = code;
@@ -32,6 +33,7 @@ public class Room {
         this.roomStats = roomStats;
         this.levels = levels;
         this.isPublic = isPublic;
+        this.online = online;
     }
 
     public Room(String server_name, String code, boolean isPublic) {
@@ -43,6 +45,15 @@ public class Room {
         this.roomStats = new RoomStats(0,0,0);
         this.levels = new ArrayList<>();
         this.isPublic = isPublic;
+        this.online = false;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 
     public Long getID() {
@@ -131,7 +142,8 @@ public class Room {
                 ", users_in_room=" + users_in_room +
                 ", roomStats=" + roomStats +
                 ", levels=" + levels +
-                ", isPublic=" + isPublic+
+                ", isPublic=" + isPublic +
+                ", online=" + online +
                 '}';
     }
 

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -72,9 +75,27 @@ public class UserService {
         return userRepository.getUserByMail(mail).getRooms();
     }
 
-    public List<String> getFriendResquest(String mail) throws  UserException{
+    public List<User.FriendRequest> getFriendRequest(String mail) throws  UserException{
         verifyUserExists(mail);
-        return userRepository.getUserByMail(mail).getFriendsRequest();
+        return userRepository.getUserByMail(mail).getFriendRequest();
+    }
+
+    public List<User.FriendRequest> getFriendRequestReceivedPending(String mail) throws  UserException{
+        verifyUserExists(mail);
+        List<User.FriendRequest> allFriendRequests = getFriendRequest(mail);
+        return allFriendRequests.stream()
+                .filter(request -> request.getState() == User.RequestState.PENDING)
+                .filter(request -> !Objects.equals(request.getSender(), mail))
+                .collect(Collectors.toList());
+    }
+
+    public List<User.FriendRequest> getFriendRequestSendPending(String mail) throws  UserException{
+        verifyUserExists(mail);
+        List<User.FriendRequest> allFriendRequests = getFriendRequest(mail);
+        return allFriendRequests.stream()
+                .filter(request -> request.getState() != User.RequestState.ACCEPTED)
+                .filter(request -> Objects.equals(request.getSender(), mail))
+                .collect(Collectors.toList());
     }
 
     //UPDATE
@@ -83,9 +104,10 @@ public class UserService {
         userRepository.updateUserNickname(mail,nickname);
     }
 
-    public void updateUserFriends(String mail,List<String> friends) throws UserException {
-        verifyUserExists(mail);
-        userRepository.updateUserFriends(mail, friends);
+    public void updateAddUserFriends(String mail,String friendMail) throws UserException {
+        List<String> listUserFriends = getUserFriends(mail);
+        listUserFriends.add(friendMail);
+        userRepository.updateUserFriends(mail, listUserFriends);
     }
 
     public void updateUserRooms(String mail,List<String> rooms) throws UserException {
@@ -93,15 +115,49 @@ public class UserService {
         userRepository.updateUserRooms(mail, rooms);
     }
 
-    public void updateUserFriendRequest(String mail, String friendMail) throws UserException{
-        verifyUserExists(friendMail);
-        List<String> friendRequest = getFriendResquest(friendMail);
-        friendRequest.add(friendMail);
-        userRepository.updateFriendRequest(friendMail,friendRequest);
-        verifyUserExists(mail);
-        friendRequest = getFriendResquest(mail);
-        friendRequest.add(mail);
-        userRepository.updateFriendRequest(mail,friendRequest);
+    public void updateUserAddFriendRequest(String mail, String friendMail) throws UserException{
+        verifyFriendRequestDoesNotExist(mail,friendMail);
+        List<User.FriendRequest> listFriendRequestSender = getFriendRequest(mail);
+        List<User.FriendRequest> listFriendRequestReceiver = getFriendRequest(friendMail);
+        listFriendRequestSender.add(new User.FriendRequest(mail,friendMail));
+        listFriendRequestReceiver.add(new User.FriendRequest(mail,friendMail));
+        userRepository.updateUserFriendRequest(mail,listFriendRequestSender);
+        userRepository.updateUserFriendRequest(friendMail,listFriendRequestReceiver);
+    }
+
+    public void updateUserResponseFriendRequest(String mail, String friendMail, String response) throws UserException{
+        List<User.FriendRequest> listFriendRequestSender = getFriendRequest(mail);
+        List<User.FriendRequest> listFriendRequestReceiver = getFriendRequest(friendMail);
+        Optional<User.FriendRequest> friendRequestSender = listFriendRequestSender.stream()
+                .filter(request -> request.getSender().equals(friendMail))
+                .filter(request -> request.getState().equals(User.RequestState.PENDING))
+                .findFirst();
+
+        Optional<User.FriendRequest> friendRequestReceiver = listFriendRequestReceiver.stream()
+                .filter(request -> request.getReceiver().equals(mail))
+                .filter(request -> request.getState().equals(User.RequestState.PENDING))
+                .findFirst();
+
+        if (friendRequestSender.isPresent() && friendRequestReceiver.isPresent()) {
+            User.FriendRequest sender = friendRequestSender.get();
+            User.FriendRequest receiver = friendRequestReceiver.get();
+            if(response.equals("accepted")){
+                sender.setState(User.RequestState.ACCEPTED);
+                receiver.setState(User.RequestState.ACCEPTED);
+                updateAddUserFriends(mail,friendMail);
+                updateAddUserFriends(friendMail,mail);
+            } else if (response.equals("refused")) {
+                sender.setState(User.RequestState.REFUSED);
+                receiver.setState(User.RequestState.REFUSED);
+            }else {
+                sender.setState(User.RequestState.PENDING);
+                receiver.setState(User.RequestState.PENDING);
+            }
+            userRepository.updateUserFriendRequest(mail,listFriendRequestSender);
+            userRepository.updateUserFriendRequest(friendMail,listFriendRequestReceiver);
+        }else {
+            throw new UserException("Friend request not found");
+        }
     }
 
     /*USER-STATS*/
@@ -113,15 +169,12 @@ public class UserService {
     }
 
     public void deleteFriendRequest(String mail,String friendMail) throws UserException{
-        verifyUserExists(friendMail);
-        List<String> friendRequest = getFriendResquest(friendMail);
-        friendRequest.remove(friendMail);
-        userRepository.updateFriendRequest(friendMail,friendRequest);
-        verifyUserExists(mail);
-        friendRequest = getFriendResquest(mail);
-        friendRequest.remove(mail);
-        userRepository.updateFriendRequest(mail,friendRequest);
-
+        List<User.FriendRequest> listFriendRequestSender = getFriendRequest(mail);
+        List<User.FriendRequest> listFriendRequestReceiver = getFriendRequest(friendMail);
+        listFriendRequestSender.add(new User.FriendRequest(mail,friendMail));
+        listFriendRequestReceiver.add(new User.FriendRequest(mail,friendMail));
+        userRepository.updateUserFriendRequest(mail,listFriendRequestSender);
+        userRepository.updateUserFriendRequest(mail,listFriendRequestReceiver);
     }
 
     public void verifyUserExists(String mail) throws UserException {
@@ -135,6 +188,22 @@ public class UserService {
         User userById = userRepository.getUserById(id);
         if (userById == null){
             throw new UserException("User not found by ID "+ id);
+        }
+    }
+
+    public void verifyFriendRequestDoesNotExist(String mail, String friendMail) throws UserException {
+        List<User.FriendRequest> listFriendRequestSender = getFriendRequest(mail);
+        List<User.FriendRequest> listFriendRequestReceiver = getFriendRequest(friendMail);
+        List<String> friends = getUserFriends(mail);
+
+        boolean senderExists = listFriendRequestSender.stream()
+                .anyMatch(request -> request.getSender().equals(friendMail) && request.getReceiver().equals(mail) && request.getState().equals(User.RequestState.PENDING) && request.getState().equals(User.RequestState.ACCEPTED));
+
+        boolean receiverExists = listFriendRequestReceiver.stream()
+                .anyMatch(request -> request.getSender().equals(mail) && request.getReceiver().equals(friendMail) && request.getState().equals(User.RequestState.PENDING) && request.getState().equals(User.RequestState.ACCEPTED));
+
+        if (senderExists || receiverExists || friends.contains(friendMail)) {
+            throw new UserException("Friend request already sent or received or accepted");
         }
     }
 }

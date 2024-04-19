@@ -1,7 +1,6 @@
 package arsw.CenizasDelPasado.demo.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,9 +19,9 @@ public class User {
     @Indexed(unique = true)
     private String mail;
     private GameStats gameStats;
+    private List<FriendRequest> friendRequest;
     private List<String> friends;
     private List<String> rooms;
-    private List<String> request;
 
     @PersistenceCreator
     public User(Long ID, String nickname, String mail, GameStats gameStats, List<String> friends, List<String> rooms) {
@@ -32,7 +31,7 @@ public class User {
         this.gameStats = gameStats;
         this.friends = friends;
         this.rooms = rooms;
-        this.request = new ArrayList<>();
+        this.friendRequest = new ArrayList<>();
     }
 
     public User(String nickname, String mail) {
@@ -40,17 +39,18 @@ public class User {
         this.nickname = nickname;
         this.mail = mail;
         this.gameStats = new GameStats(0,0,0,0,0);
+        this.friendRequest = new ArrayList<>();
         this.friends = new ArrayList<>();
         this.rooms = new ArrayList<>();
-        this.request = new ArrayList<>();
     }
 
-    public List<String> getFriendsRequest() {
-        return request;
+
+    public List<FriendRequest> getFriendRequest() {
+        return friendRequest;
     }
 
-    public void setFriendsRequest(List<String> friendsRequest) {
-        this.request = friendsRequest;
+    public void setFriendRequest(List<FriendRequest> friendRequest) {
+        this.friendRequest = friendRequest;
     }
 
     public Long getID() {
@@ -108,6 +108,7 @@ public class User {
                 ", nickname='" + nickname + '\'' +
                 ", mail='" + mail + '\'' +
                 ", gameStats=" + gameStats +
+                ", friendRequest=" + friendRequest +
                 ", friends=" + friends +
                 ", rooms=" + rooms +
                 '}';
@@ -179,5 +180,54 @@ public class User {
                     ", games_played=" + games_played +
                     '}';
         }
+    }
+    public static class FriendRequest {
+        private String sender;
+        private String receiver;
+        private RequestState state;
+
+        public FriendRequest(String sender, String receiver) {
+            this.sender = sender;
+            this.receiver = receiver;
+            this.state = RequestState.PENDING;
+        }
+
+        public String getSender() {
+            return sender;
+        }
+
+        public void setSender(String sender) {
+            this.sender = sender;
+        }
+
+        public String getReceiver() {
+            return receiver;
+        }
+
+        public void setReceiver(String receiver) {
+            this.receiver = receiver;
+        }
+
+        public RequestState getState() {
+            return state;
+        }
+
+        public void setState(RequestState state) {
+            this.state = state;
+        }
+
+        @Override
+        public String toString() {
+            return "friendRequest{" +
+                    "sender='" + sender + '\'' +
+                    ", receiver='" + receiver + '\'' +
+                    ", state=" + state +
+                    '}';
+        }
+    }
+    public enum RequestState {
+        PENDING,
+        ACCEPTED,
+        REFUSED
     }
 }

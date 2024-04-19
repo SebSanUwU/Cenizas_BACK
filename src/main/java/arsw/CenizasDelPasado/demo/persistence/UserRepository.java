@@ -24,11 +24,11 @@ public interface UserRepository extends MongoRepository<User, Long> {
     @Update("{ '$set' : { 'friends' : ?1 } }")
     void updateUserFriends(String mail,List<String> friends) throws UserException;
     @Query("{ 'mail' : ?0 }")
-    @Update("{ '$set' : { 'friends' : ?1 } }")
-    void updateFriendRequest(String mail,List<String> friends) throws UserException;
-    @Query("{ 'mail' : ?0 }")
     @Update("{ '$set' : { 'rooms' : ?1 } }")
     void updateUserRooms(String mail,List<String> rooms) throws UserException;
+    @Query("{ 'mail' : ?0 }")
+    @Update("{ '$set' : { 'friendRequest' : ?1 } }")
+    void updateUserFriendRequest(String mail,List<User.FriendRequest> list) throws UserException;
     void deleteUserByMail(String mail) throws UserException;
 
 }

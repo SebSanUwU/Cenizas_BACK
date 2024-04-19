@@ -30,6 +30,10 @@ public interface RoomRepository extends MongoRepository<Room, Long> {
     @Update("{ '$set' : { 'levels' : ?1 } }")
     void updateRoomLevels(String code,List<Long> levels) throws RoomException;
 
+    @Query("{code:?0}")
+    @Update("{ '$set' : { 'online' : ?1 } }")
+    void updateRoomOnline(String code,Boolean online) throws RoomException;
+
     void deleteRoomByCode(String code) throws RoomException;
 }
 

@@ -26,11 +26,11 @@ public class RoomService {
     void createUsers(){
         System.out.println("Data creation started ROOMS ...");
         roomRepository.deleteAll();
-        roomRepository.save(new Room(1L,"Among us",generateCode(),new Date(),Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"),new Room.RoomStats(15,1425,3),Arrays.asList(1L,2L),true));
-        roomRepository.save(new Room(2L, "Minecraft", generateCode(), new Date(), Arrays.asList("amigo1@gmail.com", "amigo2@gmail.com"), new Room.RoomStats(20, 3000, 5), Arrays.asList(3L, 4L),true));
-        roomRepository.save(new Room(3L, "Fortnite", generateCode(), new Date(), Arrays.asList("usuario1@gmail.com", "usuario2@gmail.com"), new Room.RoomStats(10, 500, 2), Arrays.asList(5L, 6L, 7L),true));
-        roomRepository.save(new Room(4L, "League of Legends", generateCode(), new Date(), Arrays.asList("player1@gmail.com", "player2@gmail.com", "player3@gmail.com"), new Room.RoomStats(30, 7000, 10), Arrays.asList(8L),true));
-        roomRepository.save(new Room(5L, "Call of Duty", generateCode(), new Date(), Arrays.asList("gamer1@gmail.com", "gamer2@gmail.com"), new Room.RoomStats(25, 4000, 8), Arrays.asList(9L, 10L, 11L),true));
+        roomRepository.save(new Room(1L,"Among us",generateCode(),new Date(),Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"),new Room.RoomStats(15,1425,3),Arrays.asList(1L,2L),true,true));
+        roomRepository.save(new Room(2L, "Minecraft", generateCode(), new Date(), Arrays.asList("amigo1@gmail.com", "amigo2@gmail.com"), new Room.RoomStats(20, 3000, 5), Arrays.asList(3L, 4L),true,true));
+        roomRepository.save(new Room(3L, "Fortnite", generateCode(), new Date(), Arrays.asList("usuario1@gmail.com", "usuario2@gmail.com"), new Room.RoomStats(10, 500, 2), Arrays.asList(5L, 6L, 7L),true,false));
+        roomRepository.save(new Room(4L, "League of Legends", generateCode(), new Date(), Arrays.asList("player1@gmail.com", "player2@gmail.com", "player3@gmail.com"), new Room.RoomStats(30, 7000, 10), Arrays.asList(8L),true,false));
+        roomRepository.save(new Room(5L, "Call of Duty", generateCode(), new Date(), Arrays.asList("gamer1@gmail.com", "gamer2@gmail.com"), new Room.RoomStats(25, 4000, 8), Arrays.asList(9L, 10L, 11L),true,false));
         System.out.println("Data creation ROOMS complete...");
     }
 
@@ -69,6 +69,10 @@ public class RoomService {
         return roomRepository.getRoomByCode(code).getUsers_in_room();
     }
 
+    public List<Room> getPublicRoomsOnline(){
+        return showAllRooms().stream().filter(Room::isPublic).filter(Room::isOnline).toList();
+    }
+
     public List<Long> getRoomLevels(String code) throws RoomException{
         verifyRoomExists(code);
         return roomRepository.getRoomByCode(code).getLevels();
@@ -95,6 +99,11 @@ public class RoomService {
     public void updateRoomLevels(String code,List<Long> levels) throws RoomException {
         verifyRoomExists(code);
         roomRepository.updateRoomLevels(code,levels);
+    }
+
+    public void updateRoomOnline(String code, Boolean online) throws RoomException {
+        verifyRoomExists(code);
+        roomRepository.updateRoomOnline(code, online);
     }
 
     /*ROOM-STATS*/
@@ -149,6 +158,4 @@ public class RoomService {
             throw new RoomException("Room not found by: "+id);
         }
     }
-
-
 }

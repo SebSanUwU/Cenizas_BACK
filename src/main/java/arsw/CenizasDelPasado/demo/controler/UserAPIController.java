@@ -2,7 +2,6 @@ package arsw.CenizasDelPasado.demo.controler;
 
 import arsw.CenizasDelPasado.demo.model.User;
 import arsw.CenizasDelPasado.demo.persistence.exception.UserException;
-import arsw.CenizasDelPasado.demo.persistence.exception.UserPersistenceException;
 import arsw.CenizasDelPasado.demo.service.UserService;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -123,19 +122,7 @@ public class UserAPIController {
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
-    @Operation(summary = "Actualizar amigos de un usuario", description = "Este endpoint permite actualizar la lista de amigos de un usuario basado en su dirección de correo electrónico.")
-    @ApiResponse(responseCode = "202", description = "Lista de amigos del usuario actualizada exitosamente", content = @Content)
-    @ApiResponse(responseCode = "406", description = "No se pudo actualizar la lista de amigos del usuario", content = @Content)
-    @PutMapping(path = "/{mail}/update-friends")
-    public ResponseEntity<?> putUserFriends(@PathVariable("mail") String mail, @RequestBody List<String> friends){
-        try{
-            userService.updateUserFriends(mail, friends);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
-        } catch(Exception ex){
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
+
     @Operation(summary = "Actualizar salas de un usuario", description = "Este endpoint permite actualizar la lista de salas de un usuario basado en su dirección de correo electrónico.")
     @ApiResponse(responseCode = "202", description = "Lista de salas del usuario actualizada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar la lista de salas del usuario", content = @Content)
@@ -162,41 +149,56 @@ public class UserAPIController {
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
-    @Operation(summary = "Inicia sesion de un usuario", description = "Este endpoint me premite revisar si un usuario ya existe, en caso de que no lo crea")
-    @ApiResponse(responseCode = "203", description = "Se inicio secion correctamente", content = @Content)
-    @ApiResponse(responseCode = "406", description = "No se pudo iniciar sesion", content = @Content)
-    @GetMapping("startSession")
-    public ResponseEntity<?> startSession(@RequestBody Map<String, String> user) throws UserException, UserPersistenceException {
-        try {
-            if (userService.getUser(user.get("mail")) != null) {
-                return new ResponseEntity<>(userService.getUser(user.get("mail")), HttpStatus.FOUND);
-            } else {
-                User newUser = new User(user.get(user.get("nickname")), user.get("mail"));
-                userService.saveUser(newUser);
-                return new ResponseEntity<>(HttpStatus.CREATED);
-            }
-        }catch(UserPersistenceException e){
-            User newUser = new User(user.get("nickname"), user.get("mail"));
-            userService.saveUser(newUser);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-    }
 
-    @Operation(summary = "Mandar Solicitud de amistad", description = "Este endpoint me permite mandarle una solicitud de amistad a otro usuario")
+    @Operation(summary = "Mandar Solicitud de amistad", description = "Este endpoint permite mandarle una solicitud de amistad a otro usuario")
     @ApiResponse(responseCode ="203", description = "Se mando correctamente la solicitud")
     @ApiResponse(responseCode = "406", description = "No se pudo enviar la solicitud correctamente")
-    @PostMapping(value = "/sendFriendRequest")
-    public ResponseEntity<?> sendFriendRequest(@RequestParam("user") String user,@RequestParam("friendMail") String friendMail){
+    @PutMapping(value = "{mail}/sendFriendRequest")
+    public ResponseEntity<?> putCreateFriendRequest(@PathVariable("mail") String mail,@RequestParam("friendMail") String friendMail){
         try {
-            if (userService.getUser(user) != null || userService.getUser(friendMail) != null)  {
-                userService.updateUserFriendRequest(user,friendMail);
-                return new ResponseEntity<>( HttpStatus.ACCEPTED);
-            }else{
-                return new ResponseEntity<>("Usuario no existe", HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            userService.updateUserAddFriendRequest(mail,friendMail);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }catch(UserException ex){
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @Operation(summary = "Responder solicitud de amistad", description = "Este endpoint me permite responder una solicitud de amistad a otro usuario")
+    @ApiResponse(responseCode ="203", description = "Se respondio correctamente la solicitud")
+    @ApiResponse(responseCode = "406", description = "No se pudo enviar la respuesta correctamente")
+    @PutMapping(value = "{mail}/ResponseFriendRequest")
+    public ResponseEntity<?> putResponseFriendRequest(@PathVariable("mail") String mail,@RequestParam("friendMail") String friendMail,@RequestParam("response") String response){
+        try {
+            userService.updateUserResponseFriendRequest(mail, friendMail, response);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }catch(UserException ex){
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+    @Operation(summary = "Obtener solicitudes pendientes enviadas de un usuario", description = "Este endpoint devuelve las salas de un usuario basado en su dirección de correo electrónico.")
+    @ApiResponse(responseCode = "200", description = "Lista de solicitudes pendientes", content = @Content)
+    @ApiResponse(responseCode = "404", description = "Lista de solicitudes pendientes no encontrado", content = @Content)
+    @GetMapping("/{mail}/SendFriendRequestPending")
+    public ResponseEntity<?> getUserFriendRequestSendPending(@PathVariable("mail") String mail){
+        try {
+            return new ResponseEntity<>(userService.getFriendRequestSendPending(mail), HttpStatus.ACCEPTED);
+        } catch (UserException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+    @Operation(summary = "Obtener solicitudes pendientes recibidas de un usuario", description = "Este endpoint devuelve las salas de un usuario basado en su dirección de correo electrónico.")
+    @ApiResponse(responseCode = "200", description = "Lista de solicitudes recibidas", content = @Content)
+    @ApiResponse(responseCode = "404", description = "Lista de solicitudes recibidas no encontrado", content = @Content)
+    @GetMapping("/{mail}/ReceivedFriendRequestPending")
+    public ResponseEntity<?> getUserFriendRequestReceivedPending(@PathVariable("mail") String mail){
+        try {
+            return new ResponseEntity<>(userService.getFriendRequestReceivedPending(mail), HttpStatus.ACCEPTED);
+        } catch (UserException e) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 }

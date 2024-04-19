@@ -193,4 +193,45 @@ public class RoomAPIController {
             return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
+
+    @Operation(summary = "Actualizar sala en linea", description = "Este endpoint permite poner la sala en linea para que sea visto por los jugadores.")
+    @ApiResponse(responseCode = "202", description = "Sala en linea exitosamente", content = @Content)
+    @ApiResponse(responseCode = "406", description = "No se pudo poner en linea a la sala", content = @Content)
+    @PutMapping(path = "/{code}/RoomOn")
+    public ResponseEntity<?> putRoomOnlineOn(@PathVariable("code") String code){
+        try{
+            roomService.updateRoomOnline(code,true);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch(Exception ex){
+            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @Operation(summary = "Actualizar sala en fuera de linea", description = "Este endpoint permite poner la sala en fuera de linea para que no sea visto por los jugadores.")
+    @ApiResponse(responseCode = "202", description = "Sala fuera de linea exitosamente", content = @Content)
+    @ApiResponse(responseCode = "406", description = "No se pudo poner en fuera de linea a la sala", content = @Content)
+    @PutMapping(path = "/{code}/RoomOff")
+    public ResponseEntity<?> putRoomOnlineOff(@PathVariable("code") String code){
+        try{
+            roomService.updateRoomOnline(code,false);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch(Exception ex){
+            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @Operation(summary = "Obtener salas publicas y en linea", description = "Este endpoint devuelve la lista de salas piblicas y que esten en linea.")
+    @ApiResponse(responseCode = "302", description = "Lista de salas publicas", content = @Content)
+    @ApiResponse(responseCode = "404", description = "Salas publicas no encontrada", content = @Content)
+    @GetMapping(value = "/publicRooms")
+    public ResponseEntity<?> getPublicRooms() {
+        try {
+            return new ResponseEntity<>(roomService.getPublicRoomsOnline(), HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 }

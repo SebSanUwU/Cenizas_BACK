@@ -35,7 +35,7 @@ public class CenizasDelPasadoApplication implements CommandLineRunner {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:4200")
+						.allowedOrigins("https://cenizasdelpasadogame.azurewebsites.net")
 						.allowedMethods("GET", "POST","PUT", "DELETE");
 			}
 		};

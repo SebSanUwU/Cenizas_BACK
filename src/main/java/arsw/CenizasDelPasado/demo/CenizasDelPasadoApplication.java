@@ -15,15 +15,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 @EnableMongoRepositories
 public class CenizasDelPasadoApplication implements CommandLineRunner {
-	@Autowired
-	RoomRepository roomRepository;
 
-	@Autowired
-	UserRepository userRepository;
+	private final RoomRepository roomRepository;
 
-	@Autowired
-	LevelRepository levelRepository;
+	private final UserRepository userRepository;
 
+
+	private final LevelRepository levelRepository;
+
+	public CenizasDelPasadoApplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
+		this.levelRepository= levelRepository;
+		this.roomRepository= roomRepository;
+		this.userRepository= userRepository;
+
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(CenizasDelPasadoApplication.class, args);

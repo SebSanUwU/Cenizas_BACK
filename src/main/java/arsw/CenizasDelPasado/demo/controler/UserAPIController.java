@@ -19,9 +19,12 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping(value = "/v1/users")
 public class UserAPIController {
-    @Autowired
-    private UserService userService;
 
+    private final UserService userService;
+
+    public UserAPIController(UserService userService){
+        this.userService = userService;
+    }
     @Operation(summary = "Obtener todos los usuarios", description = "Este endpoint devuelve una lista de todos los usuarios.")
     @ApiResponse(responseCode = "200", description = "Lista de usuarios", content = @Content)
     @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)

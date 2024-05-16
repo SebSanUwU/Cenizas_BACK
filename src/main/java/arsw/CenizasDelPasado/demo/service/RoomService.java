@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 public class RoomService {
 
-    @Autowired
-    RoomRepository roomRepository;
+
+    private final RoomRepository roomRepository;
 
     public RoomService(RoomRepository rp) {
         this.roomRepository = rp;

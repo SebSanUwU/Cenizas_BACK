@@ -22,11 +22,14 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping(value = "/v1/rooms")
 public class RoomAPIController {
-    @Autowired
-    private RoomService roomService;
+    private final RoomService roomService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public RoomAPIController(UserService userService, RoomService roomService){
+        this.roomService = roomService;
+        this.userService = userService;
+    }
 
     @Operation(summary = "Obtener todas las salas", description = "Este endpoint devuelve una lista de todas las salas.")
     @ApiResponse(responseCode = "200", description = "Lista de salas", content = @Content)

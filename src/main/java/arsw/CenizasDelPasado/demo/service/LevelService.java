@@ -14,8 +14,7 @@ import java.util.List;
 @Service
 public class LevelService {
 
-    @Autowired
-    LevelRepository levelRepository;
+    private final LevelRepository levelRepository;
 
     public LevelService(LevelRepository levelRepository){
         this.levelRepository = levelRepository;

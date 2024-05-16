@@ -22,8 +22,11 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping(value = "/v1/levels")
 public class LevelAPIController {
-    @Autowired
-    private LevelService levelService;
+    private final LevelService levelService;
+
+    public LevelAPIController(LevelService levelService){
+        this.levelService = levelService;
+    }
 
     @Operation(summary = "Obtener todos los niveles", description = "Este endpoint devuelve una lista de todos los niveles.")
     @ApiResponse(responseCode = "202", description = "Lista de niveles", content = @Content)

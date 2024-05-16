@@ -20,8 +20,8 @@ public interface LevelRepository extends MongoRepository<LevelGame, Long>{
     @Update("{ '$set' : { 'complete' : ?1 } }")
     void updateLevelComplete(Long id,Boolean complete) throws LevelException;
     @Query("{ID:?0}")
-    @Update("{ '$set' : { 'num_objects' : ?1 } }")
-    void updateLevelNumObjects(Long id,int num_objects) throws LevelException;
+    @Update("{ '$set' : { 'numObjects' : ?1 } }")
+    void updateLevelNumObjects(Long id,int numObjects) throws LevelException;
 
     void deleteLevelByID(Long id) throws LevelException;
 }

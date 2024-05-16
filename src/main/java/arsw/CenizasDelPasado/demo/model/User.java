@@ -116,17 +116,17 @@ public class User {
 
     public static class GameStats{
         private int levels_complete;
-        private int total_score;
-        private int objects_found;
-        private int num_deaths;
-        private int games_played;
+        private int totalScore;
+        private int objectsFound;
+        private int numDeaths;
+        private int gamesPlayed;
 
-        public GameStats(int levels_complete, int total_score, int objects_found, int num_deaths, int games_played) {
+        public GameStats(int levels_complete, int totalScore, int objectsFound, int numDeaths, int gamesPlayed) {
             this.levels_complete = levels_complete;
-            this.total_score = total_score;
-            this.objects_found = objects_found;
-            this.num_deaths = num_deaths;
-            this.games_played = games_played;
+            this.totalScore = totalScore;
+            this.objectsFound = objectsFound;
+            this.numDeaths = numDeaths;
+            this.gamesPlayed = gamesPlayed;
         }
 
         public int getLevels_complete() {
@@ -137,36 +137,36 @@ public class User {
             this.levels_complete = levels_complete;
         }
 
-        public int getTotal_score() {
-            return total_score;
+        public int gettotalScore() {
+            return totalScore;
         }
 
-        public void setTotal_score(int total_score) {
-            this.total_score = total_score;
+        public void settotalScore(int totalScore) {
+            this.totalScore = totalScore;
         }
 
-        public int getObjects_found() {
-            return objects_found;
+        public int getobjectsFound() {
+            return objectsFound;
         }
 
-        public void setObjects_found(int objects_found) {
-            this.objects_found = objects_found;
+        public void setobjectsFound(int objectsFound) {
+            this.objectsFound = objectsFound;
         }
 
-        public int getNum_deaths() {
-            return num_deaths;
+        public int getnumDeaths() {
+            return numDeaths;
         }
 
-        public void setNum_deaths(int num_deaths) {
-            this.num_deaths = num_deaths;
+        public void setnumDeaths(int numDeaths) {
+            this.numDeaths = numDeaths;
         }
 
-        public int getGames_played() {
-            return games_played;
+        public int getgamesPlayed() {
+            return gamesPlayed;
         }
 
-        public void setGames_played(int games_played) {
-            this.games_played = games_played;
+        public void setgamesPlayed(int gamesPlayed) {
+            this.gamesPlayed = gamesPlayed;
         }
 
 
@@ -174,10 +174,10 @@ public class User {
         public String toString() {
             return "GameStats{" +
                     "levels_complete=" + levels_complete +
-                    ", total_score=" + total_score +
-                    ", objects_found=" + objects_found +
-                    ", num_deaths=" + num_deaths +
-                    ", games_played=" + games_played +
+                    ", totalScore=" + totalScore +
+                    ", objectsFound=" + objectsFound +
+                    ", numDeaths=" + numDeaths +
+                    ", gamesPlayed=" + gamesPlayed +
                     '}';
         }
     }

@@ -106,9 +106,9 @@ public class LevelAPIController {
     @ApiResponse(responseCode = "202", description = "Cantidad de objetos del nivel actualizada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar la cantidad de objetos del nivel", content = @Content)
     @PutMapping(value = "/{id}/update-num-objects")
-    public ResponseEntity<?> putLevelNumObjects(@PathVariable("id") Long id,@RequestParam("num_objects") int num_objects){
+    public ResponseEntity<?> putLevelNumObjects(@PathVariable("id") Long id,@RequestParam("numObjects") int numObjects){
         try {
-            levelService.updateLevelNumObjects(id,num_objects);
+            levelService.updateLevelNumObjects(id,numObjects);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (LevelException e) {
             Logger.getLogger(LevelGame.class.getName()).log(Level.SEVERE, null, e);

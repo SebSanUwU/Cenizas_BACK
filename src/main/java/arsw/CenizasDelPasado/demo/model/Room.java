@@ -16,7 +16,7 @@ public class Room {
     private String serverName;
     @Indexed(unique = true)
     private String code;
-    private Date creation_date;
+    private Date creationDate;
     private List<String> usersInRoom;
     private RoomStats roomStats;
     private List<Long> levels;
@@ -24,11 +24,11 @@ public class Room {
     private boolean online;
 
     @PersistenceCreator
-    public Room(Long ID, String serverName, String code, Date creation_date, List<String> usersInRoom, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
+    public Room(Long ID, String serverName, String code, Date creationDate, List<String> usersInRoom, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
         this.iD = ID;
         this.serverName = serverName;
         this.code = code;
-        this.creation_date = creation_date;
+        this.creationDate = creationDate;
         this.usersInRoom = usersInRoom;
         this.roomStats = roomStats;
         this.levels = levels;
@@ -40,7 +40,7 @@ public class Room {
         this.iD = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         this.serverName = serverName;
         this.code = code;
-        this.creation_date = new Date();
+        this.creationDate = new Date();
         this.usersInRoom = new ArrayList<>(NUMBERPLAYERS);
         this.roomStats = new RoomStats(0,0,0);
         this.levels = new ArrayList<>();
@@ -88,12 +88,12 @@ public class Room {
         this.code = code;
     }
 
-    public Date getCreation_date() {
-        return creation_date;
+    public Date getcreationDate() {
+        return creationDate;
     }
 
-    public void setCreation_date(Date creation_date) {
-        this.creation_date = creation_date;
+    public void setcreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public List<String> getusersInRoom() {
@@ -138,7 +138,7 @@ public class Room {
                 "ID=" + iD +
                 ", serverName='" + serverName + '\'' +
                 ", code='" + code + '\'' +
-                ", creation_date=" + creation_date +
+                ", creationDate=" + creationDate +
                 ", usersInRoom=" + usersInRoom +
                 ", roomStats=" + roomStats +
                 ", levels=" + levels +
@@ -150,12 +150,12 @@ public class Room {
     public static class RoomStats{
         private int total_deaths;
         private int time;
-        private int objects_found;
+        private int objectsFound;
 
-        public RoomStats(int total_deaths, int time, int objects_found) {
+        public RoomStats(int total_deaths, int time, int objectsFound) {
             this.total_deaths = total_deaths;
             this.time = time;
-            this.objects_found = objects_found;
+            this.objectsFound = objectsFound;
         }
 
         public int getTotal_deaths() {
@@ -174,12 +174,12 @@ public class Room {
             this.time = time;
         }
 
-        public int getObjects_found() {
-            return objects_found;
+        public int getobjectsFound() {
+            return objectsFound;
         }
 
-        public void setObjects_found(int objects_found) {
-            this.objects_found = objects_found;
+        public void setobjectsFound(int objectsFound) {
+            this.objectsFound = objectsFound;
         }
 
         @Override
@@ -187,7 +187,7 @@ public class Room {
             return "RoomStats{" +
                     "total_deaths=" + total_deaths +
                     ", time=" + time +
-                    ", objects_found=" + objects_found +
+                    ", objectsFound=" + objectsFound +
                     '}';
         }
     }

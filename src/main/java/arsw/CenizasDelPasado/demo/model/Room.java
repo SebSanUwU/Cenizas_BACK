@@ -24,8 +24,8 @@ public class Room {
     private boolean online;
 
     @PersistenceCreator
-    public Room(Long ID, String serverName, String code, Date creationDate, List<String> usersInRoom, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
-        this.iD = ID;
+    public Room(Long iD, String serverName, String code, Date creationDate, List<String> usersInRoom, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
+        this.iD = iD;
         this.serverName = serverName;
         this.code = code;
         this.creationDate = creationDate;
@@ -148,22 +148,22 @@ public class Room {
     }
 
     public static class RoomStats{
-        private int total_deaths;
+        private int totalDeaths;
         private int time;
         private int objectsFound;
 
-        public RoomStats(int total_deaths, int time, int objectsFound) {
-            this.total_deaths = total_deaths;
+        public RoomStats(int totalDeaths, int time, int objectsFound) {
+            this.totalDeaths = totalDeaths;
             this.time = time;
             this.objectsFound = objectsFound;
         }
 
-        public int getTotal_deaths() {
-            return total_deaths;
+        public int gettotalDeaths() {
+            return totalDeaths;
         }
 
-        public void setTotal_deaths(int total_deaths) {
-            this.total_deaths = total_deaths;
+        public void settotalDeaths(int totalDeaths) {
+            this.totalDeaths = totalDeaths;
         }
 
         public int getTime() {
@@ -185,7 +185,7 @@ public class Room {
         @Override
         public String toString() {
             return "RoomStats{" +
-                    "total_deaths=" + total_deaths +
+                    "totalDeaths=" + totalDeaths +
                     ", time=" + time +
                     ", objectsFound=" + objectsFound +
                     '}';

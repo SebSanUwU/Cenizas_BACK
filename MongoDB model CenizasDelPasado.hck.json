@@ -155,7 +155,7 @@
                     "isActivated": true,
                     "type": "string",
                     "GUID": "59ba1213-56f6-4e57-84e4-2449a6029e8f",
-                    "name": "Server_name",
+                    "name": "serverName",
                     "error": {}
                 },
                 {
@@ -207,7 +207,7 @@
                             "isActivated": true,
                             "type": "numeric",
                             "GUID": "64268c1f-06ec-4fcd-85cd-4856f44159b5",
-                            "name": "total_deaths",
+                            "name": "totalDeaths",
                             "error": {}
                         },
                         {
@@ -428,11 +428,11 @@
         "af7be72c-12b9-4167-9ac9-cfb36aa8fb71": "numDeaths",
         "3438e581-b28b-4bc6-b6a5-6ac1fc5e7d90": "Room",
         "b5f02265-97d9-41dc-92c1-9a32fb839fdc": "ID",
-        "59ba1213-56f6-4e57-84e4-2449a6029e8f": "Server_name",
+        "59ba1213-56f6-4e57-84e4-2449a6029e8f": "serverName",
         "d6467ee6-38ea-4363-b40f-965cae3c4ef5": "Users_in_room",
         "0223e1eb-5c31-49d9-a245-fac2eebb46f2": "Rooms",
         "befc0fbc-ea7f-4098-a6b4-f17ceb304b97": "RoomStats",
-        "64268c1f-06ec-4fcd-85cd-4856f44159b5": "total_deaths",
+        "64268c1f-06ec-4fcd-85cd-4856f44159b5": "totalDeaths",
         "011d626c-2401-4adc-83b7-d1d8c216b898": "time",
         "4081e9b2-555b-49ce-9d11-72aec78a0228": "objectsFound",
         "c2335435-a44d-4a69-a6fa-b1175c87628d": "Levels",

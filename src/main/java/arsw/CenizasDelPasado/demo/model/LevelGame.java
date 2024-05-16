@@ -15,8 +15,8 @@ public class LevelGame {
     private boolean complete;
     private List<Enemy> enemies;
 
-    public LevelGame(Long ID, String name, int numObjects, boolean complete, List<Enemy> enemies) {
-        this.iD = ID;
+    public LevelGame(Long iD, String name, int numObjects, boolean complete, List<Enemy> enemies) {
+        this.iD = iD;
         this.name = name;
         this.numObjects = numObjects;
         this.complete = complete;

@@ -106,10 +106,10 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "201", description = "Sala creada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear la sala", content = @Content)
     @PostMapping(value = "/create")
-    public ResponseEntity<?> createRoom(@RequestParam("server_name") String server_name, @RequestParam("isPublic") boolean isPublic,@RequestParam("user_creator") String user){
+    public ResponseEntity<?> createRoom(@RequestParam("serverName") String serverName, @RequestParam("isPublic") boolean isPublic,@RequestParam("user_creator") String user){
         try{
             String code = roomService.generateCode();
-            Room room = new Room(server_name,code,isPublic);
+            Room room = new Room(serverName,code,isPublic);
             roomService.saveRoom(room);
             putRoomUsers(code,user);
             List<String> userRooms = userService.getUserRooms(user);
@@ -137,9 +137,9 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "202", description = "Nombre de servidor de sala actualizado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar el nombre de servidor de la sala", content = @Content)
     @PutMapping(value = "/{code}/update-name")
-    public ResponseEntity<?> putRoomServerName(@PathVariable("code") String code,@RequestParam("server_name") String server_name){
+    public ResponseEntity<?> putRoomServerName(@PathVariable("code") String code,@RequestParam("serverName") String serverName){
         try{
-            roomService.updateRoomServerName(code, server_name);
+            roomService.updateRoomServerName(code, serverName);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch(Exception ex){
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);

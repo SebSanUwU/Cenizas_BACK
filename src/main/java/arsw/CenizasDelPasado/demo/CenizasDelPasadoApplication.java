@@ -1,9 +1,8 @@
-package arsw.CenizasDelPasado.demo;
+package arsw.cenizasdelpasado.demo;
 
-import arsw.CenizasDelPasado.demo.persistence.LevelRepository;
-import arsw.CenizasDelPasado.demo.persistence.RoomRepository;
-import arsw.CenizasDelPasado.demo.persistence.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import arsw.cenizasdelpasado.demo.persistence.LevelRepository;
+import arsw.cenizasdelpasado.demo.persistence.RoomRepository;
+import arsw.cenizasdelpasado.demo.persistence.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @EnableMongoRepositories
-public class CenizasDelPasadoApplication implements CommandLineRunner {
+public class cenizasdelpasadoapplication implements CommandLineRunner {
 
 	private final RoomRepository roomRepository;
 
@@ -23,7 +22,7 @@ public class CenizasDelPasadoApplication implements CommandLineRunner {
 
 	private final LevelRepository levelRepository;
 
-	public CenizasDelPasadoApplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
+	public cenizasdelpasadoapplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
 		this.levelRepository= levelRepository;
 		this.roomRepository= roomRepository;
 		this.userRepository= userRepository;
@@ -31,7 +30,7 @@ public class CenizasDelPasadoApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(CenizasDelPasadoApplication.class, args);
+		SpringApplication.run(cenizasdelpasadoapplication.class, args);
 	}
 
 	@Bean
@@ -48,5 +47,7 @@ public class CenizasDelPasadoApplication implements CommandLineRunner {
 
 
 	@Override
-	public void run(String... args) throws Exception {}
+	public void run(String... args) throws Exception {
+		System.out.println("GAME-RUNNING");
+	}
 }

@@ -1,6 +1,6 @@
-package arsw.CenizasDelPasado.demo.model;
+package arsw.cenizasdelpasado.demo.model;
 
-import arsw.CenizasDelPasado.demo.model.enemys.Enemy;
+import arsw.cenizasdelpasado.demo.model.enemys.Enemy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

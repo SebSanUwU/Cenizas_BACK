@@ -1,4 +1,4 @@
-package arsw.CenizasDelPasado.demo.model.enemys;
+package arsw.cenizasdelpasado.demo.model.enemys;
 
 public abstract class Enemy {
 }

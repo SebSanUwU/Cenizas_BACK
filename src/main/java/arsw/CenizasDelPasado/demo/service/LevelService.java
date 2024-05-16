@@ -1,12 +1,11 @@
-package arsw.CenizasDelPasado.demo.service;
+package arsw.cenizasdelpasado.demo.service;
 
 
-import arsw.CenizasDelPasado.demo.model.LevelGame;
-import arsw.CenizasDelPasado.demo.model.enemys.Enemy;
-import arsw.CenizasDelPasado.demo.persistence.LevelRepository;
-import arsw.CenizasDelPasado.demo.persistence.exception.LevelException;
-import arsw.CenizasDelPasado.demo.persistence.exception.LevelPersistenceException;
-import org.springframework.beans.factory.annotation.Autowired;
+import arsw.cenizasdelpasado.demo.model.LevelGame;
+import arsw.cenizasdelpasado.demo.model.enemys.Enemy;
+import arsw.cenizasdelpasado.demo.persistence.LevelRepository;
+import arsw.cenizasdelpasado.demo.persistence.exception.LevelException;
+import arsw.cenizasdelpasado.demo.persistence.exception.LevelPersistenceException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

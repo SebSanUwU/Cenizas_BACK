@@ -1,20 +1,19 @@
-package arsw.CenizasDelPasado.demo;
+package arsw.cenizasdelpasado.demo;
 
-import arsw.CenizasDelPasado.demo.model.LevelGame;
-import arsw.CenizasDelPasado.demo.model.Room;
-import arsw.CenizasDelPasado.demo.model.User;
-import arsw.CenizasDelPasado.demo.persistence.LevelRepository;
-import arsw.CenizasDelPasado.demo.persistence.RoomRepository;
-import arsw.CenizasDelPasado.demo.persistence.UserRepository;
-import arsw.CenizasDelPasado.demo.persistence.exception.LevelException;
-import arsw.CenizasDelPasado.demo.persistence.exception.LevelPersistenceException;
-import arsw.CenizasDelPasado.demo.persistence.exception.RoomException;
-import arsw.CenizasDelPasado.demo.persistence.exception.UserException;
-import arsw.CenizasDelPasado.demo.service.*;
+import arsw.cenizasdelpasado.demo.model.LevelGame;
+import arsw.cenizasdelpasado.demo.model.Room;
+import arsw.cenizasdelpasado.demo.model.User;
+import arsw.cenizasdelpasado.demo.persistence.LevelRepository;
+import arsw.cenizasdelpasado.demo.persistence.RoomRepository;
+import arsw.cenizasdelpasado.demo.persistence.UserRepository;
+import arsw.cenizasdelpasado.demo.persistence.exception.LevelException;
+import arsw.cenizasdelpasado.demo.persistence.exception.LevelPersistenceException;
+import arsw.cenizasdelpasado.demo.persistence.exception.RoomException;
+import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
+import arsw.cenizasdelpasado.demo.service.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class CenizasDelPasadoApplicationTests {
+class cenizasdelpasadoApplicationTests {
     @Mock
     private LevelRepository levelRepository;
     @Mock

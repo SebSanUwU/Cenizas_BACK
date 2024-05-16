@@ -1,8 +1,8 @@
-package arsw.CenizasDelPasado.demo.persistence;
+package arsw.cenizasdelpasado.demo.persistence;
 
-import arsw.CenizasDelPasado.demo.model.LevelGame;
-import arsw.CenizasDelPasado.demo.model.enemys.Enemy;
-import arsw.CenizasDelPasado.demo.persistence.exception.LevelException;
+import arsw.cenizasdelpasado.demo.model.LevelGame;
+import arsw.cenizasdelpasado.demo.model.enemys.Enemy;
+import arsw.cenizasdelpasado.demo.persistence.exception.LevelException;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.Update;

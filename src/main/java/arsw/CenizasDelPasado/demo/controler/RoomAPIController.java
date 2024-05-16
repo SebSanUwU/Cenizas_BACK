@@ -1,15 +1,13 @@
-package arsw.CenizasDelPasado.demo.controler;
+package arsw.cenizasdelpasado.demo.controler;
 
 
-import arsw.CenizasDelPasado.demo.model.Room;
-import arsw.CenizasDelPasado.demo.model.User;
-import arsw.CenizasDelPasado.demo.persistence.exception.UserException;
-import arsw.CenizasDelPasado.demo.service.RoomService;
-import arsw.CenizasDelPasado.demo.service.UserService;
+import arsw.cenizasdelpasado.demo.model.Room;
+import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
+import arsw.cenizasdelpasado.demo.service.RoomService;
+import arsw.cenizasdelpasado.demo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

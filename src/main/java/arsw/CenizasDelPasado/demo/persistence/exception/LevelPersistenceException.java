@@ -1,4 +1,4 @@
-package arsw.CenizasDelPasado.demo.persistence.exception;
+package arsw.cenizasdelpasado.demo.persistence.exception;
 
 public class LevelPersistenceException extends Exception{
     public LevelPersistenceException(String message) {

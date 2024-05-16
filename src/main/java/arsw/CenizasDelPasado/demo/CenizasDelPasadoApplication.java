@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @EnableMongoRepositories
-public class cenizasdelpasadoapplication implements CommandLineRunner {
+public class CenizasDelPasadoApplication implements CommandLineRunner {
 
 	private final RoomRepository roomRepository;
 
@@ -22,7 +22,7 @@ public class cenizasdelpasadoapplication implements CommandLineRunner {
 
 	private final LevelRepository levelRepository;
 
-	public cenizasdelpasadoapplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
+	public CenizasDelPasadoApplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
 		this.levelRepository= levelRepository;
 		this.roomRepository= roomRepository;
 		this.userRepository= userRepository;
@@ -30,7 +30,7 @@ public class cenizasdelpasadoapplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(cenizasdelpasadoapplication.class, args);
+		SpringApplication.run(CenizasDelPasadoApplication.class, args);
 	}
 
 	@Bean

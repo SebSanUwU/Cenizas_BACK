@@ -12,7 +12,7 @@ import java.util.*;
 public class Room {
     public static final int NUMBERPLAYERS = 5;
     @Id
-    private Long ID;
+    private Long iD;
     private String server_name;
     @Indexed(unique = true)
     private String code;
@@ -25,7 +25,7 @@ public class Room {
 
     @PersistenceCreator
     public Room(Long ID, String server_name, String code, Date creation_date, List<String> users_in_room, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
-        this.ID = ID;
+        this.iD = ID;
         this.server_name = server_name;
         this.code = code;
         this.creation_date = creation_date;
@@ -37,7 +37,7 @@ public class Room {
     }
 
     public Room(String server_name, String code, boolean isPublic) {
-        this.ID = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        this.iD = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         this.server_name = server_name;
         this.code = code;
         this.creation_date = new Date();
@@ -57,11 +57,11 @@ public class Room {
     }
 
     public Long getID() {
-        return ID;
+        return iD;
     }
 
     public void setID(Long ID) {
-        this.ID = ID;
+        this.iD = ID;
     }
 
     public String getServer_name() {
@@ -135,7 +135,7 @@ public class Room {
     @Override
     public String toString() {
         return "Room{" +
-                "ID=" + ID +
+                "ID=" + iD +
                 ", server_name='" + server_name + '\'' +
                 ", code='" + code + '\'' +
                 ", creation_date=" + creation_date +

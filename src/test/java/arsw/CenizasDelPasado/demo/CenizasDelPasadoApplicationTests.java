@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class cenizasdelpasadoApplicationTests {
+class CenizasDelPasadoApplicationTests {
     @Mock
     private LevelRepository levelRepository;
     @Mock

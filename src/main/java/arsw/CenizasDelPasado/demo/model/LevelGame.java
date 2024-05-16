@@ -9,14 +9,14 @@ import java.util.List;
 @Document("Level")
 public class LevelGame {
     @Id
-    private Long ID;
+    private Long iD;
     private String name;
     private int num_objects;
     private boolean complete;
     private List<Enemy> enemies;
 
     public LevelGame(Long ID, String name, int num_objects, boolean complete, List<Enemy> enemies) {
-        this.ID = ID;
+        this.iD = ID;
         this.name = name;
         this.num_objects = num_objects;
         this.complete = complete;
@@ -24,11 +24,11 @@ public class LevelGame {
     }
 
     public Long getID() {
-        return ID;
+        return iD;
     }
 
     public void setID(Long ID) {
-        this.ID = ID;
+        this.iD = ID;
     }
 
     public String getName() {

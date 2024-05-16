@@ -14,7 +14,7 @@ import java.util.UUID;
 public class User {
 
     @Id
-    private Long ID;
+    private Long iD;
     private String nickname;
     @Indexed(unique = true)
     private String mail;
@@ -25,7 +25,7 @@ public class User {
 
     @PersistenceCreator
     public User(Long ID, String nickname, String mail, GameStats gameStats, List<String> friends, List<String> rooms) {
-        this.ID = ID;
+        this.iD = ID;
         this.nickname = nickname;
         this.mail = mail;
         this.gameStats = gameStats;
@@ -35,7 +35,7 @@ public class User {
     }
 
     public User(String nickname, String mail) {
-        this.ID = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        this.iD = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         this.nickname = nickname;
         this.mail = mail;
         this.gameStats = new GameStats(0,0,0,0,0);
@@ -54,11 +54,11 @@ public class User {
     }
 
     public Long getID() {
-        return ID;
+        return iD;
     }
 
     public void setID(Long ID) {
-        this.ID = ID;
+        this.iD = ID;
     }
 
     public String getNickname() {
@@ -104,7 +104,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "ID=" + ID +
+                "ID=" + iD +
                 ", nickname='" + nickname + '\'' +
                 ", mail='" + mail + '\'' +
                 ", gameStats=" + gameStats +

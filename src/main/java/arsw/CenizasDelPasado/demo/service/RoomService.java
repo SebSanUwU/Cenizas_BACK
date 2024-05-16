@@ -114,7 +114,7 @@ public class RoomService {
 
     public String generateCode(){
         SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[20];
+        byte[] bytes = new byte[20];
         random.nextBytes(bytes);
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         String code = "";
@@ -143,10 +143,7 @@ public class RoomService {
 
     public boolean verifyRoomExistsBreak(String code) throws RoomException{
         Room room = roomRepository.getRoomByCode(code);
-        if (room == null){
-            return false;
-        }
-        return true;
+        return room != null;
     }
 
     public void verifyRoomExists(Long id) throws RoomException{

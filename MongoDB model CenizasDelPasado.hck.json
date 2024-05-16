@@ -48,7 +48,7 @@
                             "isActivated": true,
                             "type": "numeric",
                             "GUID": "487c3730-d157-4b85-acf1-9544b4ba124c",
-                            "name": "total_score",
+                            "name": "totalScore",
                             "error": {}
                         },
                         {
@@ -56,7 +56,7 @@
                             "isActivated": true,
                             "type": "numeric",
                             "GUID": "2374ae1e-a51a-4d3b-acba-a3f832f90789",
-                            "name": "objects_found",
+                            "name": "objectsFound",
                             "error": {}
                         },
                         {
@@ -64,11 +64,11 @@
                             "isActivated": true,
                             "type": "numeric",
                             "GUID": "af7be72c-12b9-4167-9ac9-cfb36aa8fb71",
-                            "name": "num_deaths",
+                            "name": "numDeaths",
                             "error": {}
                         },
                         {
-                            "name": "games_played",
+                            "name": "gamesPlayed",
                             "hackoladeMeta": {},
                             "isActivated": true,
                             "type": "numeric",
@@ -167,7 +167,7 @@
                     "error": {}
                 },
                 {
-                    "name": "Creation_date",
+                    "name": "creationDate",
                     "hackoladeMeta": {},
                     "isActivated": true,
                     "type": "date",
@@ -219,7 +219,7 @@
                             "error": {}
                         },
                         {
-                            "name": "objects_found",
+                            "name": "objectsFound",
                             "hackoladeMeta": {},
                             "isActivated": true,
                             "type": "numeric",
@@ -293,7 +293,7 @@
                     "error": {}
                 },
                 {
-                    "name": "Num_objects",
+                    "name": "numObjects",
                     "hackoladeMeta": {},
                     "isActivated": true,
                     "type": "numeric",
@@ -422,10 +422,10 @@
         "70785386-09fe-4bbe-a3a6-2ac5baecd4b9": "ID",
         "fa656183-a3a5-49ef-aad3-92117eae0510": "Mail",
         "1711e455-402d-4800-a9b5-5a5d12dac413": "levels_complete",
-        "487c3730-d157-4b85-acf1-9544b4ba124c": "total_score",
-        "2374ae1e-a51a-4d3b-acba-a3f832f90789": "objects_found",
+        "487c3730-d157-4b85-acf1-9544b4ba124c": "totalScore",
+        "2374ae1e-a51a-4d3b-acba-a3f832f90789": "objectsFound",
         "ed295af3-be1c-4a4c-bf2d-1f86e83a8511": "Friends",
-        "af7be72c-12b9-4167-9ac9-cfb36aa8fb71": "num_deaths",
+        "af7be72c-12b9-4167-9ac9-cfb36aa8fb71": "numDeaths",
         "3438e581-b28b-4bc6-b6a5-6ac1fc5e7d90": "Room",
         "b5f02265-97d9-41dc-92c1-9a32fb839fdc": "ID",
         "59ba1213-56f6-4e57-84e4-2449a6029e8f": "Server_name",
@@ -434,14 +434,14 @@
         "befc0fbc-ea7f-4098-a6b4-f17ceb304b97": "RoomStats",
         "64268c1f-06ec-4fcd-85cd-4856f44159b5": "total_deaths",
         "011d626c-2401-4adc-83b7-d1d8c216b898": "time",
-        "4081e9b2-555b-49ce-9d11-72aec78a0228": "objects_found",
+        "4081e9b2-555b-49ce-9d11-72aec78a0228": "objectsFound",
         "c2335435-a44d-4a69-a6fa-b1175c87628d": "Levels",
         "bcf3ceac-c600-4843-a35f-9f9e9590de40": "level1",
         "dec63ebc-b87e-4358-ad21-464fc07c811f": "complete",
         "b58833c9-39d5-4854-9d31-76a547adbaed": "New Diagram View",
         "60df4c32-c175-4058-8c13-f5e109b15c2d": "Nickname",
         "38899d35-9dd1-46ea-9ad9-9e6b4ac2709d": "Code",
-        "8cae6f2c-d47d-4965-9e0a-27d84788cdcc": "Creation_date",
+        "8cae6f2c-d47d-4965-9e0a-27d84788cdcc": "creationDate",
         "56a92cbf-199e-401a-a902-6bc287eab6cf": "Level",
         "54cf95a8-6949-41f0-9184-5e2d82c00a6f": "ID",
         "c14b54e8-616d-45d7-84d1-cbac76eaae09": "Enemys",
@@ -450,8 +450,8 @@
         "046f06f4-2314-4c51-ade8-57f8a822dd00": "name_enemy2",
         "8e3c8ddf-6a80-4630-9717-73142396d21f": "num",
         "5c858477-4fe8-4d55-a132-4bc2c72c4917": "Name",
-        "074ac1a3-9205-4c10-8ad9-26e2659f35da": "games_played",
-        "2f32d674-b09d-42ab-87b1-cabce261587c": "Num_objects",
+        "074ac1a3-9205-4c10-8ad9-26e2659f35da": "gamesPlayed",
+        "2f32d674-b09d-42ab-87b1-cabce261587c": "numObjects",
         "bd386af8-322d-42d3-b297-d699ea7c00e0": "Complete"
     },
     "definitions": {

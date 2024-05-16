@@ -55,9 +55,9 @@ public class LevelService {
         levelRepository.updateLevelComplete(id,complete);
     }
 
-    public void updateLevelNumObjects(Long id, int num_objects) throws LevelException{
+    public void updateLevelNumObjects(Long id, int numObjects) throws LevelException{
         verifyLevelExists(id);
-        levelRepository.updateLevelNumObjects(id, num_objects);
+        levelRepository.updateLevelNumObjects(id, numObjects);
     }
 
     //DELETE

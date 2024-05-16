@@ -39,12 +39,12 @@ public class LevelGame {
         this.name = name;
     }
 
-    public int getNum_objects() {
+    public int getnumObjects() {
         return numObjects;
     }
 
-    public void setNum_objects(int num_objects) {
-        this.numObjects = num_objects;
+    public void setnumObjects(int numObjects) {
+        this.numObjects = numObjects;
     }
 
     public boolean isComplete() {

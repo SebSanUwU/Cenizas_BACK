@@ -60,8 +60,8 @@ public class Room {
         return iD;
     }
 
-    public void setID(Long ID) {
-        this.iD = ID;
+    public void setID(Long iD) {
+        this.iD = iD;
     }
 
     public String getserverName() {

@@ -40,7 +40,7 @@
                             "isActivated": true,
                             "type": "numeric",
                             "GUID": "1711e455-402d-4800-a9b5-5a5d12dac413",
-                            "name": "levels_complete",
+                            "name": "lid",
                             "error": {}
                         },
                         {
@@ -421,7 +421,7 @@
         "4bb90ed0-4a59-4d0f-8aee-d9fc80f29d8a": "GameStats",
         "70785386-09fe-4bbe-a3a6-2ac5baecd4b9": "ID",
         "fa656183-a3a5-49ef-aad3-92117eae0510": "Mail",
-        "1711e455-402d-4800-a9b5-5a5d12dac413": "levels_complete",
+        "1711e455-402d-4800-a9b5-5a5d12dac413": "lid",
         "487c3730-d157-4b85-acf1-9544b4ba124c": "totalScore",
         "2374ae1e-a51a-4d3b-acba-a3f832f90789": "objectsFound",
         "ed295af3-be1c-4a4c-bf2d-1f86e83a8511": "Friends",

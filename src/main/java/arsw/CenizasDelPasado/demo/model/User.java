@@ -24,8 +24,8 @@ public class User {
     private List<String> rooms;
 
     @PersistenceCreator
-    public User(Long ID, String nickname, String mail, GameStats gameStats, List<String> friends, List<String> rooms) {
-        this.iD = ID;
+    public User(Long iD, String nickname, String mail, GameStats gameStats, List<String> friends, List<String> rooms) {
+        this.iD = iD;
         this.nickname = nickname;
         this.mail = mail;
         this.gameStats = gameStats;
@@ -57,8 +57,8 @@ public class User {
         return iD;
     }
 
-    public void setID(Long ID) {
-        this.iD = ID;
+    public void setID(Long iD) {
+        this.iD = iD;
     }
 
     public String getNickname() {
@@ -115,26 +115,26 @@ public class User {
     }
 
     public static class GameStats{
-        private int levels_complete;
+        private int lid;
         private int totalScore;
         private int objectsFound;
         private int numDeaths;
         private int gamesPlayed;
 
-        public GameStats(int levels_complete, int totalScore, int objectsFound, int numDeaths, int gamesPlayed) {
-            this.levels_complete = levels_complete;
+        public GameStats(int lid, int totalScore, int objectsFound, int numDeaths, int gamesPlayed) {
+            this.lid = lid;
             this.totalScore = totalScore;
             this.objectsFound = objectsFound;
             this.numDeaths = numDeaths;
             this.gamesPlayed = gamesPlayed;
         }
 
-        public int getLevels_complete() {
-            return levels_complete;
+        public int getLid() {
+            return lid;
         }
 
-        public void setLevels_complete(int levels_complete) {
-            this.levels_complete = levels_complete;
+        public void setLid(int lid) {
+            this.lid = lid;
         }
 
         public int gettotalScore() {
@@ -173,7 +173,7 @@ public class User {
         @Override
         public String toString() {
             return "GameStats{" +
-                    "levels_complete=" + levels_complete +
+                    "lid=" + lid +
                     ", totalScore=" + totalScore +
                     ", objectsFound=" + objectsFound +
                     ", numDeaths=" + numDeaths +

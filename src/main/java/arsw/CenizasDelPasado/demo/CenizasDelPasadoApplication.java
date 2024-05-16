@@ -48,11 +48,5 @@ public class CenizasDelPasadoApplication implements CommandLineRunner {
 
 
 	@Override
-	public void run(String... args) throws Exception {
-		/*
-		roomRepository.deleteAll();
-		userRepository.deleteAll();
-		levelRepository.deleteAll();*/
-
-	}
+	public void run(String... args) throws Exception {}
 }

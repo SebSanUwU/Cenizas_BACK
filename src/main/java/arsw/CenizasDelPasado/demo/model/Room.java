@@ -13,35 +13,35 @@ public class Room {
     public static final int NUMBERPLAYERS = 5;
     @Id
     private Long iD;
-    private String server_name;
+    private String serverName;
     @Indexed(unique = true)
     private String code;
     private Date creation_date;
-    private List<String> users_in_room;
+    private List<String> usersInRoom;
     private RoomStats roomStats;
     private List<Long> levels;
     private boolean isPublic;
     private boolean online;
 
     @PersistenceCreator
-    public Room(Long ID, String server_name, String code, Date creation_date, List<String> users_in_room, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
+    public Room(Long ID, String serverName, String code, Date creation_date, List<String> usersInRoom, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
         this.iD = ID;
-        this.server_name = server_name;
+        this.serverName = serverName;
         this.code = code;
         this.creation_date = creation_date;
-        this.users_in_room = users_in_room;
+        this.usersInRoom = usersInRoom;
         this.roomStats = roomStats;
         this.levels = levels;
         this.isPublic = isPublic;
         this.online = online;
     }
 
-    public Room(String server_name, String code, boolean isPublic) {
+    public Room(String serverName, String code, boolean isPublic) {
         this.iD = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        this.server_name = server_name;
+        this.serverName = serverName;
         this.code = code;
         this.creation_date = new Date();
-        this.users_in_room = new ArrayList<>(NUMBERPLAYERS);
+        this.usersInRoom = new ArrayList<>(NUMBERPLAYERS);
         this.roomStats = new RoomStats(0,0,0);
         this.levels = new ArrayList<>();
         this.isPublic = isPublic;
@@ -64,12 +64,12 @@ public class Room {
         this.iD = ID;
     }
 
-    public String getServer_name() {
-        return server_name;
+    public String getserverName() {
+        return serverName;
     }
 
-    public void setServer_name(String server_name) {
-        this.server_name = server_name;
+    public void setserverName(String serverName) {
+        this.serverName = serverName;
     }
 
     public void setPublic(boolean aPublic) {
@@ -96,12 +96,12 @@ public class Room {
         this.creation_date = creation_date;
     }
 
-    public List<String> getUsers_in_room() {
-        return users_in_room;
+    public List<String> getusersInRoom() {
+        return usersInRoom;
     }
 
-    public void setUsers_in_room(List<String> users_in_room) {
-        this.users_in_room = users_in_room;
+    public void setusersInRoom(List<String> usersInRoom) {
+        this.usersInRoom = usersInRoom;
     }
 
     public RoomStats getRoomStats() {
@@ -136,10 +136,10 @@ public class Room {
     public String toString() {
         return "Room{" +
                 "ID=" + iD +
-                ", server_name='" + server_name + '\'' +
+                ", serverName='" + serverName + '\'' +
                 ", code='" + code + '\'' +
                 ", creation_date=" + creation_date +
-                ", users_in_room=" + users_in_room +
+                ", usersInRoom=" + usersInRoom +
                 ", roomStats=" + roomStats +
                 ", levels=" + levels +
                 ", isPublic=" + isPublic +

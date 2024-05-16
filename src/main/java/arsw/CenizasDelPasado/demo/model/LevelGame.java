@@ -11,14 +11,14 @@ public class LevelGame {
     @Id
     private Long iD;
     private String name;
-    private int num_objects;
+    private int numObjects;
     private boolean complete;
     private List<Enemy> enemies;
 
-    public LevelGame(Long ID, String name, int num_objects, boolean complete, List<Enemy> enemies) {
+    public LevelGame(Long ID, String name, int numObjects, boolean complete, List<Enemy> enemies) {
         this.iD = ID;
         this.name = name;
-        this.num_objects = num_objects;
+        this.numObjects = numObjects;
         this.complete = complete;
         this.enemies = enemies;
     }
@@ -40,11 +40,11 @@ public class LevelGame {
     }
 
     public int getNum_objects() {
-        return num_objects;
+        return numObjects;
     }
 
     public void setNum_objects(int num_objects) {
-        this.num_objects = num_objects;
+        this.numObjects = num_objects;
     }
 
     public boolean isComplete() {

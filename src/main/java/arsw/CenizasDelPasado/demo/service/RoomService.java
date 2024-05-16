@@ -63,7 +63,7 @@ public class RoomService {
 
     public List<String> getRoomUsers(String code) throws RoomException{
         verifyRoomExists(code);
-        return roomRepository.getRoomByCode(code).getUsers_in_room();
+        return roomRepository.getRoomByCode(code).getusersInRoom();
     }
 
     public List<Room> getPublicRoomsOnline(){
@@ -88,9 +88,9 @@ public class RoomService {
         roomRepository.updateRoomServerName(code,serverName);
     }
 
-    public void updateRoomUsers(String code,List<String> users_in_room) throws RoomException {
+    public void updateRoomUsers(String code,List<String> usersInRoom) throws RoomException {
         verifyRoomExists(code);
-        roomRepository.updateRoomUsersInRoom(code,users_in_room);
+        roomRepository.updateRoomUsersInRoom(code,usersInRoom);
     }
 
     public void updateRoomLevels(String code,List<Long> levels) throws RoomException {

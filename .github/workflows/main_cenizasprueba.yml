@@ -91,7 +91,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'CenizasDelPasadoBack'
+          app-name: 'CenizasPrueba'
           slot-name: 'Production'
           package: '*.jar'
           

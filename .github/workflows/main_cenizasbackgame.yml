@@ -15,26 +15,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v1.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=Sebastian Zamora Urrego
-            -Dsonar.projectKey=Cenizas_BACK
-            -Dsonar.java.coveragePlugin=jacoco
-            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-      
-
       - name: Set up Java version
         uses: actions/setup-java@v3
         with:
           java-version: '17'
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Build with Maven and SonarQube Scan
+        run: mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+          SONAR_PROJECT_KEY: Cenizas_BACK
+          SONAR_ORGANIZATION: rekhugopal
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3

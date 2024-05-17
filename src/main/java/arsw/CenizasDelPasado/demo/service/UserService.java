@@ -92,7 +92,7 @@ public class UserService {
         return allFriendRequests.stream()
                 .filter(request -> request.getState() != User.RequestState.ACCEPTED)
                 .filter(request -> Objects.equals(request.getSender(), mail))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     //UPDATE

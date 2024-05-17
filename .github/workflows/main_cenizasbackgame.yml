@@ -28,7 +28,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
           SONAR_PROJECT_KEY: Cenizas_BACK
-          SONAR_ORGANIZATION: rekhugopal
+          SONAR_ORGANIZATION: Sebastian Zamora Urrego
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3

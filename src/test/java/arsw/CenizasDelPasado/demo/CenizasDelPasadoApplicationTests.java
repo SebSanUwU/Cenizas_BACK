@@ -41,7 +41,7 @@ class CenizasDelPasadoApplicationTests {
     private LevelService levelService;
 
     @Test
-    public void testVerifyLevelExists_NotFound() throws LevelException{
+    void testVerifyLevelExists_NotFound() throws LevelException{
         LevelService service = mock(LevelService.class);
         LevelRepository mockRepo = mock(LevelRepository.class);
         when(mockRepo.getLevelById(1L)).thenReturn(null);

@@ -64,7 +64,7 @@ class CenizasDelPasadoApplicationTests {
         // Arrange
         LevelGame levelGame = new LevelGame(1L,"prueba",5,false);
         levelGame.setID(1L);
-        when(levelRepository.getLevelById(1L)).thenReturn(new LevelGame(1L,"prueba2",5,false,new ArrayList<>()));
+        when(levelRepository.getLevelById(1L)).thenReturn(new LevelGame(1L,"prueba2",5,false));
 
         // Act & Assert
         assertThrows(LevelPersistenceException.class, () -> levelService.saveLevel(levelGame));

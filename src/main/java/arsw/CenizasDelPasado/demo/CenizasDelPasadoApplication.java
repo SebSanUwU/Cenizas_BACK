@@ -14,7 +14,7 @@ import arsw.cenizasdelpasado.demo.persistence.UserRepository;
 
 @SpringBootApplication
 @EnableMongoRepositories
-public class CenizasDelPasadoApplication implements CommandLineRunner {
+public class CenizasDelPasadoApplication {
 
 
     public CenizasDelPasadoApplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
@@ -35,11 +35,5 @@ public class CenizasDelPasadoApplication implements CommandLineRunner {
 						.allowedMethods("GET", "POST","PUT", "DELETE");
 			}
 		};
-	}
-
-
-	@Override
-	public void run(String... args) throws Exception {
-		System.out.println("GAME-RUNNING");
 	}
 }

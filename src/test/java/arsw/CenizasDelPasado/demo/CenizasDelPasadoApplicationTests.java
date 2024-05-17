@@ -50,7 +50,7 @@ class CenizasDelPasadoApplicationTests {
 
 
     @Test
-    public void saveLevel_WhenLevelDoesNotExist_ShouldSaveLevel() throws LevelException {
+    void saveLevel_WhenLevelDoesNotExist_ShouldSaveLevel() throws LevelException {
         // Arrange
         LevelGame levelGame = new LevelGame(1L,"prueba",5,false);
         when(levelRepository.getLevelById(anyLong())).thenReturn(null);
@@ -60,7 +60,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void saveLevel_WhenLevelExists_ShouldThrowException() throws LevelException {
+    void saveLevel_WhenLevelExists_ShouldThrowException() throws LevelException {
         // Arrange
         LevelGame levelGame = new LevelGame(1L,"prueba",5,false);
         levelGame.setID(1L);
@@ -71,7 +71,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void showAllLevels_ShouldReturnAllLevels() {
+    void showAllLevels_ShouldReturnAllLevels() {
         // Arrange
         List<LevelGame> levels = new ArrayList<>();
         when(levelRepository.findAll()).thenReturn(levels);
@@ -84,7 +84,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void saveRoom_WhenRoomDoesNotExist_ShouldSaveRoom() throws RoomException {
+    void saveRoom_WhenRoomDoesNotExist_ShouldSaveRoom() throws RoomException {
         // Arrange
         Room room = new Room("prueba_server","ABC1SDAS",false);
         when(roomRepository.getRoomByCode(anyString())).thenReturn(null);
@@ -99,7 +99,7 @@ class CenizasDelPasadoApplicationTests {
 
 
     @Test
-    public void testSaveUser_NewUser() throws UserException {
+    void testSaveUser_NewUser() throws UserException {
         // Prepare
         User newUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
         when(userRepository.getUserById(newUser.getID())).thenReturn(null);
@@ -115,7 +115,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void testShowAllUsers() {
+    void testShowAllUsers() {
         // Prepare
         List<User> userList = new ArrayList<>();
         userList.add(new User(1L,"AlpinitoDeSandia","juancamargo@gmail.com",new User.GameStats(5,1000,12,15,2), List.of(new String[]{"ejemplo1@gmail.com", "ejemplo3@gmail.com"}), List.of(new String[]{"XTS1"})));
@@ -129,7 +129,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void testGetUser_ExistingUser() throws UserException {
+    void testGetUser_ExistingUser() throws UserException {
         // Prepare
         String mail = "example@example.com";
         User existingUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
@@ -142,7 +142,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void testGetUser_NonExistingUser() throws UserException {
+    void testGetUser_NonExistingUser() throws UserException {
         // Prepare
         String mail = "nonexisting@example.com";
         when(userRepository.getUserByMail(mail)).thenReturn(null);
@@ -155,7 +155,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void testGetUserGameStats_ExistingUser() throws UserException {
+    void testGetUserGameStats_ExistingUser() throws UserException {
         // Prepare
         String mail = "example@example.com";
         User existingUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
@@ -168,7 +168,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void testGetUserGameStats_NonExistingUser() throws UserException {
+    void testGetUserGameStats_NonExistingUser() throws UserException {
         // Prepare
         String mail = "nonexisting@example.com";
         when(userRepository.getUserByMail(mail)).thenReturn(null);
@@ -181,7 +181,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void testUpdateUserNickname_ExistingUser() throws UserException {
+    void testUpdateUserNickname_ExistingUser() throws UserException {
         // Prepare
         String mail = "example@example.com";
         String newNickname = "NewNickname";
@@ -197,7 +197,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    public void testUpdateUserNickname_NonExistingUser() throws UserException {
+    void testUpdateUserNickname_NonExistingUser() throws UserException {
         // Prepare
         String mail = "nonexisting@example.com";
         String newNickname = "NewNickname";

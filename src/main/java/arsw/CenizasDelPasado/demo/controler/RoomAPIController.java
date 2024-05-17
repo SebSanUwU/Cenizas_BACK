@@ -68,7 +68,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "302", description = "Usuarios en la sala", content = @Content)
     @ApiResponse(responseCode = "404", description = "Sala no encontrada", content = @Content)
     @GetMapping(value = "/{code}/users-in-room")
-    public ResponseEntity<?> getRoomUsers(@PathVariable("code") String code) {
+    public ResponseEntity<Object> getRoomUsers(@PathVariable("code") String code) {
         try {
             return new ResponseEntity<>(roomService.getRoomUsers(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {

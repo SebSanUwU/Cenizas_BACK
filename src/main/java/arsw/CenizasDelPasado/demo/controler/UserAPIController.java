@@ -26,8 +26,8 @@ public class UserAPIController {
     @Operation(summary = "Obtener todos los usuarios", description = "Este endpoint devuelve una lista de todos los usuarios.")
     @ApiResponse(responseCode = "200", description = "Lista de usuarios", content = @Content)
     @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> protocolGetUser() {
+    @GetMapping
+    public ResponseEntity<Object> protocolGetUser() {
         try {
             return new ResponseEntity<>(userService.showAllUsers(), HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -39,7 +39,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "200", description = "Usuario encontrado", content = @Content)
     @ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content)
     @GetMapping("/{mail}")
-    public ResponseEntity<?> getUser(@PathVariable("mail") String mail){
+    public ResponseEntity<Object> getUser(@PathVariable("mail") String mail){
         try {
             return new ResponseEntity<>(userService.getUser(mail), HttpStatus.ACCEPTED);
         } catch (UserException e) {
@@ -51,7 +51,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "200", description = "Lista de amigos del usuario", content = @Content)
     @ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content)
     @GetMapping("/{mail}/friends")
-    public ResponseEntity<?> getUserFriends(@PathVariable("mail") String mail){
+    public ResponseEntity<Object> getUserFriends(@PathVariable("mail") String mail){
         try {
             return new ResponseEntity<>(userService.getUserFriends(mail), HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "200", description = "Estadísticas de juego del usuario como JSON del objeto GameStats", content = @Content)
     @ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content)
     @GetMapping("/{mail}/game-stats")
-    public ResponseEntity<?> getUserGameStats(@PathVariable("mail") String mail){
+    public ResponseEntity<Object> getUserGameStats(@PathVariable("mail") String mail){
         try {
             return new ResponseEntity<>(userService.getUserGameStats(mail), HttpStatus.ACCEPTED);
         } catch (UserException e) {
@@ -75,7 +75,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "200", description = "Lista de salas del usuario", content = @Content)
     @ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content)
     @GetMapping("/{mail}/rooms")
-    public ResponseEntity<?> getUserRooms(@PathVariable("mail") String mail){
+    public ResponseEntity<Object> getUserRooms(@PathVariable("mail") String mail){
         try {
             return new ResponseEntity<>(userService.getUserRooms(mail), HttpStatus.ACCEPTED);
         } catch (UserException e) {
@@ -86,8 +86,8 @@ public class UserAPIController {
     @Operation(summary = "Crear un nuevo usuario por inyección", description = "Este endpoint permite crear un nuevo usuario con un body que tenga toda la información del usuario.")
     @ApiResponse(responseCode = "201", description = "Usuario creado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear el usuario", content = @Content)
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> protocolPostUser(@RequestBody User user){
+    @PostMapping
+    public ResponseEntity<Object> protocolPostUser(@RequestBody User user){
         try{
             userService.saveUser(user);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -100,7 +100,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "201", description = "Usuario creado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear el usuario", content = @Content)
     @PostMapping(path = "/create")
-    public ResponseEntity<?> createNewUser(@RequestParam("nickname") String nickname,@RequestParam("mail") String mail){
+    public ResponseEntity<Object> createNewUser(@RequestParam("nickname") String nickname,@RequestParam("mail") String mail){
         try{
             User user = new User(nickname,mail);
             userService.saveUser(user);
@@ -114,7 +114,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "202", description = "Apodo del usuario actualizado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar el apodo del usuario", content = @Content)
     @PutMapping(path = "/{mail}/update-nickname")
-    public ResponseEntity<?> putUserNickname(@PathVariable("mail") String mail,@RequestParam("nickname") String nickname){
+    public ResponseEntity<Object> putUserNickname(@PathVariable("mail") String mail,@RequestParam("nickname") String nickname){
         try{
             userService.updateUserNickname(mail, nickname);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -128,7 +128,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "202", description = "Lista de salas del usuario actualizada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar la lista de salas del usuario", content = @Content)
     @PutMapping(path = "/{mail}/update-rooms")
-    public ResponseEntity<?> putUserRooms(@PathVariable("mail") String mail, @RequestBody List<String> rooms){
+    public ResponseEntity<Object> putUserRooms(@PathVariable("mail") String mail, @RequestBody List<String> rooms){
         try{
             userService.updateUserRooms(mail, rooms);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -141,7 +141,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "202", description = "Usuario eliminado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo eliminar el usuario", content = @Content)
     @DeleteMapping(path = "/{mail}/delete")
-    public ResponseEntity<?> deleteUser(@PathVariable("mail") String mail){
+    public ResponseEntity<Object> deleteUser(@PathVariable("mail") String mail){
         try{
             userService.deleteUser(mail);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -155,7 +155,7 @@ public class UserAPIController {
     @ApiResponse(responseCode ="203", description = "Se mando correctamente la solicitud")
     @ApiResponse(responseCode = "406", description = "No se pudo enviar la solicitud correctamente")
     @PutMapping(value = "{mail}/sendFriendRequest")
-    public ResponseEntity<?> putCreateFriendRequest(@PathVariable("mail") String mail,@RequestParam("friendMail") String friendMail){
+    public ResponseEntity<Object> putCreateFriendRequest(@PathVariable("mail") String mail,@RequestParam("friendMail") String friendMail){
         try {
             userService.updateUserAddFriendRequest(mail,friendMail);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -169,7 +169,7 @@ public class UserAPIController {
     @ApiResponse(responseCode ="203", description = "Se respondio correctamente la solicitud")
     @ApiResponse(responseCode = "406", description = "No se pudo enviar la respuesta correctamente")
     @PutMapping(value = "{mail}/ResponseFriendRequest")
-    public ResponseEntity<?> putResponseFriendRequest(@PathVariable("mail") String mail,@RequestParam("friendMail") String friendMail,@RequestParam("response") String response){
+    public ResponseEntity<Object> putResponseFriendRequest(@PathVariable("mail") String mail,@RequestParam("friendMail") String friendMail,@RequestParam("response") String response){
         try {
             userService.updateUserResponseFriendRequest(mail, friendMail, response);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -182,7 +182,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "200", description = "Lista de solicitudes pendientes", content = @Content)
     @ApiResponse(responseCode = "404", description = "Lista de solicitudes pendientes no encontrado", content = @Content)
     @GetMapping("/{mail}/SendFriendRequestPending")
-    public ResponseEntity<?> getUserFriendRequestSendPending(@PathVariable("mail") String mail){
+    public ResponseEntity<Object> getUserFriendRequestSendPending(@PathVariable("mail") String mail){
         try {
             return new ResponseEntity<>(userService.getFriendRequestSendPending(mail), HttpStatus.ACCEPTED);
         } catch (UserException e) {
@@ -194,7 +194,7 @@ public class UserAPIController {
     @ApiResponse(responseCode = "200", description = "Lista de solicitudes recibidas", content = @Content)
     @ApiResponse(responseCode = "404", description = "Lista de solicitudes recibidas no encontrado", content = @Content)
     @GetMapping("/{mail}/ReceivedFriendRequestPending")
-    public ResponseEntity<?> getUserFriendRequestReceivedPending(@PathVariable("mail") String mail){
+    public ResponseEntity<Object> getUserFriendRequestReceivedPending(@PathVariable("mail") String mail){
         try {
             return new ResponseEntity<>(userService.getFriendRequestReceivedPending(mail), HttpStatus.ACCEPTED);
         } catch (UserException e) {

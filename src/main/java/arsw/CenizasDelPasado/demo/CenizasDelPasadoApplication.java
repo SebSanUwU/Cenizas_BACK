@@ -16,19 +16,10 @@ import arsw.cenizasdelpasado.demo.persistence.UserRepository;
 @EnableMongoRepositories
 public class CenizasDelPasadoApplication implements CommandLineRunner {
 
-	private final RoomRepository roomRepository;
 
-	private final UserRepository userRepository;
+    public CenizasDelPasadoApplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
 
-
-	private final LevelRepository levelRepository;
-
-	public CenizasDelPasadoApplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
-		this.levelRepository= levelRepository;
-		this.roomRepository= roomRepository;
-		this.userRepository= userRepository;
-
-	}
+    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(CenizasDelPasadoApplication.class, args);

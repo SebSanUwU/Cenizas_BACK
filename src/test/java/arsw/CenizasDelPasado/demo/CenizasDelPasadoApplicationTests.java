@@ -41,7 +41,7 @@ class CenizasDelPasadoApplicationTests {
     private LevelService levelService;
 
     @Test
-    public void testVerifyLevelExists_NotFound() throws LevelException, LevelPersistenceException {
+    public void testVerifyLevelExists_NotFound() throws LevelException{
         LevelService service = mock(LevelService.class);
         LevelRepository mockRepo = mock(LevelRepository.class);
         when(mockRepo.getLevelById(1L)).thenReturn(null);
@@ -50,7 +50,7 @@ class CenizasDelPasadoApplicationTests {
 
 
     @Test
-    void saveLevel_WhenLevelDoesNotExist_ShouldSaveLevel() throws LevelException {
+    public void saveLevel_WhenLevelDoesNotExist_ShouldSaveLevel() throws LevelException {
         // Arrange
         LevelGame levelGame = new LevelGame(1L,"prueba",5,false);
         when(levelRepository.getLevelById(anyLong())).thenReturn(null);
@@ -60,7 +60,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    void saveLevel_WhenLevelExists_ShouldThrowException() throws LevelException {
+    public void saveLevel_WhenLevelExists_ShouldThrowException() throws LevelException {
         // Arrange
         LevelGame levelGame = new LevelGame(1L,"prueba",5,false);
         levelGame.setID(1L);
@@ -71,7 +71,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    void showAllLevels_ShouldReturnAllLevels() {
+    public void showAllLevels_ShouldReturnAllLevels() {
         // Arrange
         List<LevelGame> levels = new ArrayList<>();
         when(levelRepository.findAll()).thenReturn(levels);
@@ -84,7 +84,7 @@ class CenizasDelPasadoApplicationTests {
     }
 
     @Test
-    void saveRoom_WhenRoomDoesNotExist_ShouldSaveRoom() throws RoomException {
+    public void saveRoom_WhenRoomDoesNotExist_ShouldSaveRoom() throws RoomException {
         // Arrange
         Room room = new Room("prueba_server","ABC1SDAS",false);
         when(roomRepository.getRoomByCode(anyString())).thenReturn(null);

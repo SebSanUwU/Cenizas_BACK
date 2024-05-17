@@ -11,9 +11,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,8 +26,8 @@ public class LevelAPIController {
     @Operation(summary = "Obtener todos los niveles", description = "Este endpoint devuelve una lista de todos los niveles.")
     @ApiResponse(responseCode = "202", description = "Lista de niveles", content = @Content)
     @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> protocolGetRoom(){
+    @GetMapping
+    public ResponseEntity<Object> protocolGetRoom(){
         try {
             return new ResponseEntity<>(levelService.showAllLevels(), HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -42,7 +39,7 @@ public class LevelAPIController {
     @ApiResponse(responseCode = "202", description = "Nivel encontrado", content = @Content)
     @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> getLevel(@PathVariable("id") Long id){
+    public ResponseEntity<Object> getLevel(@PathVariable("id") Long id){
         try {
             return new ResponseEntity<>(levelService.getLevel(id), HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -53,8 +50,8 @@ public class LevelAPIController {
     @Operation(summary = "Crear un nuevo nivel", description = "Este endpoint permite crear un nuevo nivel.")
     @ApiResponse(responseCode = "201", description = "Nivel creado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear el nivel", content = @Content)
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> protocolPostLevel(@RequestBody LevelGame levelGame){
+    @PostMapping
+    public ResponseEntity<Object> protocolPostLevel(@RequestBody LevelGame levelGame){
         try {
             levelService.saveLevel(levelGame);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -68,7 +65,7 @@ public class LevelAPIController {
     @ApiResponse(responseCode = "202", description = "Estado de completitud del nivel actualizado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar el estado de completitud del nivel", content = @Content)
     @PutMapping(value = "/{id}/update-complete")
-    public ResponseEntity<?> putLevelComplete(@PathVariable("id") Long id,@RequestParam("complete") boolean complete){
+    public ResponseEntity<Object> putLevelComplete(@PathVariable("id") Long id,@RequestParam("complete") boolean complete){
         try {
             levelService.updateLevelComplete(id,complete);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -81,7 +78,7 @@ public class LevelAPIController {
     @ApiResponse(responseCode = "202", description = "Cantidad de objetos del nivel actualizada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar la cantidad de objetos del nivel", content = @Content)
     @PutMapping(value = "/{id}/update-num-objects")
-    public ResponseEntity<?> putLevelNumObjects(@PathVariable("id") Long id,@RequestParam("numObjects") int numObjects){
+    public ResponseEntity<Object> putLevelNumObjects(@PathVariable("id") Long id,@RequestParam("numObjects") int numObjects){
         try {
             levelService.updateLevelNumObjects(id,numObjects);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -94,7 +91,7 @@ public class LevelAPIController {
     @ApiResponse(responseCode = "202", description = "Nivel eliminado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo eliminar el nivel", content = @Content)
     @DeleteMapping(value = "/{id}/delete")
-    public ResponseEntity<?> deleteLevel(@PathVariable("id") Long id){
+    public ResponseEntity<Object> deleteLevel(@PathVariable("id") Long id){
         try{
             levelService.deleteLevel(id);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);

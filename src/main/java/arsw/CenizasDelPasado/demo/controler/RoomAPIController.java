@@ -31,8 +31,8 @@ public class RoomAPIController {
     @Operation(summary = "Obtener todas las salas", description = "Este endpoint devuelve una lista de todas las salas.")
     @ApiResponse(responseCode = "200", description = "Lista de salas", content = @Content)
     @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> protocolGetRoom(){
+    @GetMapping
+    public ResponseEntity<Object> protocolGetRoom(){
         try {
             return new ResponseEntity<>(roomService.showAllRooms(), HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -44,7 +44,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "302", description = "Sala encontrada", content = @Content)
     @ApiResponse(responseCode = "404", description = "Sala no encontrada", content = @Content)
     @GetMapping(value = "/{code}")
-    public ResponseEntity<?> getRoom(@PathVariable("code") String code) {
+    public ResponseEntity<Object> getRoom(@PathVariable("code") String code) {
         try {
             return new ResponseEntity<>(roomService.getRoom(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
@@ -56,7 +56,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "302", description = "Estadísticas de la sala", content = @Content)
     @ApiResponse(responseCode = "404", description = "Sala no encontrada", content = @Content)
     @GetMapping(value = "/{code}/room-stats")
-    public ResponseEntity<?> getRoomStats(@PathVariable("code") String code) {
+    public ResponseEntity<Object> getRoomStats(@PathVariable("code") String code) {
         try {
             return new ResponseEntity<>(roomService.getRoomStats(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
@@ -70,7 +70,7 @@ public class RoomAPIController {
     @GetMapping(value = "/{code}/users-in-room")
     public ResponseEntity<?> getRoomUsers(@PathVariable("code") String code) {
         try {
-            return new ResponseEntity<List<String>>(roomService.getRoomUsers(code), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(roomService.getRoomUsers(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
@@ -80,7 +80,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "302", description = "Lista de niveles de la sala", content = @Content)
     @ApiResponse(responseCode = "404", description = "Sala no encontrada", content = @Content)
     @GetMapping(value = "/{code}/levels")
-    public ResponseEntity<?> getRoomLevels(@PathVariable("code") String code) {
+    public ResponseEntity<Object> getRoomLevels(@PathVariable("code") String code) {
         try {
             return new ResponseEntity<>(roomService.getRoomLevels(code), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
@@ -91,8 +91,8 @@ public class RoomAPIController {
     @Operation(summary = "Crear una nueva sala por inyección", description = "Este endpoint permite crear una nueva sala, recibiendo un body con todos los parametros para la sala")
     @ApiResponse(responseCode = "201", description = "Sala creada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear la sala", content = @Content)
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> protocolPostRoom(@RequestBody Room room){
+    @PostMapping
+    public ResponseEntity<Object> protocolPostRoom(@RequestBody Room room){
         try{
             roomService.saveRoom(room);
             return new ResponseEntity<>(room,HttpStatus.ACCEPTED);
@@ -105,7 +105,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "201", description = "Sala creada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear la sala", content = @Content)
     @PostMapping(value = "/create")
-    public ResponseEntity<?> createRoom(@RequestParam("serverName") String serverName, @RequestParam("isPublic") boolean isPublic,@RequestParam("user_creator") String user){
+    public ResponseEntity<Object> createRoom(@RequestParam("serverName") String serverName, @RequestParam("isPublic") boolean isPublic,@RequestParam("user_creator") String user){
         try{
             String code = roomService.generateCode();
             Room room = new Room(serverName,code,isPublic);
@@ -124,7 +124,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "202", description = "Código de sala actualizado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar el código de la sala", content = @Content)
     @PutMapping(value = "/{code}/new-code")
-    public ResponseEntity<?> putRoomNewCode(@PathVariable("code") String code){
+    public ResponseEntity<Object> putRoomNewCode(@PathVariable("code") String code){
         try{
             return new ResponseEntity<>(roomService.updateRoomCode(code),HttpStatus.ACCEPTED);
         } catch(Exception ex){
@@ -136,7 +136,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "202", description = "Nombre de servidor de sala actualizado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar el nombre de servidor de la sala", content = @Content)
     @PutMapping(value = "/{code}/update-name")
-    public ResponseEntity<?> putRoomServerName(@PathVariable("code") String code,@RequestParam("serverName") String serverName){
+    public ResponseEntity<Object> putRoomServerName(@PathVariable("code") String code,@RequestParam("serverName") String serverName){
         try{
             roomService.updateRoomServerName(code, serverName);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -149,9 +149,10 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "202", description = "Usuarios de sala actualizados exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar los usuarios de la sala", content = @Content)
     @PutMapping(value = "/{code}/update-users")
-    public ResponseEntity<?> putRoomUsers(@PathVariable("code") String code, @RequestParam("user") String user){
+    public void putRoomUsers(@PathVariable("code") String code, @RequestParam("user") String user){
         try{
             List<String> users = (List<String>) getRoomUsers(code).getBody();
+            assert users != null;
             if(!users.contains(user)){
                 users.add(user);
                 roomService.updateRoomUsers(code,users);
@@ -159,19 +160,19 @@ public class RoomAPIController {
                 throw new UserException("Usuario ya esta en la sala.");
             }
 
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            new ResponseEntity<>(HttpStatus.ACCEPTED);
 
 
         } catch(Exception ex){
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
     @Operation(summary = "Actualizar niveles de una sala", description = "Este endpoint permite actualizar los niveles de una sala.")
     @ApiResponse(responseCode = "202", description = "Niveles de sala actualizados exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar los niveles de la sala", content = @Content)
     @PutMapping(value = "/{code}/update-levels")
-    public ResponseEntity<?> putRoomLevels(@PathVariable("code") String code, @RequestBody List<Long> levels){
+    public ResponseEntity<Object> putRoomLevels(@PathVariable("code") String code, @RequestBody List<Long> levels){
         try{
             roomService.updateRoomLevels(code,levels);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -184,7 +185,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "202", description = "Sala eliminada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo eliminar la sala", content = @Content)
     @DeleteMapping(path = "/{code}/delete")
-    public ResponseEntity<?> deleteRoom(@PathVariable("code") String code){
+    public ResponseEntity<Object> deleteRoom(@PathVariable("code") String code){
         try{
             roomService.deleteRoom(code);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -198,7 +199,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "202", description = "Sala en linea exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo poner en linea a la sala", content = @Content)
     @PutMapping(path = "/{code}/RoomOn")
-    public ResponseEntity<?> putRoomOnlineOn(@PathVariable("code") String code){
+    public ResponseEntity<Object> putRoomOnlineOn(@PathVariable("code") String code){
         try{
             roomService.updateRoomOnline(code,true);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -212,7 +213,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "202", description = "Sala fuera de linea exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo poner en fuera de linea a la sala", content = @Content)
     @PutMapping(path = "/{code}/RoomOff")
-    public ResponseEntity<?> putRoomOnlineOff(@PathVariable("code") String code){
+    public ResponseEntity<Object> putRoomOnlineOff(@PathVariable("code") String code){
         try{
             roomService.updateRoomOnline(code,false);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -226,7 +227,7 @@ public class RoomAPIController {
     @ApiResponse(responseCode = "302", description = "Lista de salas publicas", content = @Content)
     @ApiResponse(responseCode = "404", description = "Salas publicas no encontrada", content = @Content)
     @GetMapping(value = "/publicRooms")
-    public ResponseEntity<?> getPublicRooms() {
+    public ResponseEntity<Object> getPublicRooms() {
         try {
             return new ResponseEntity<>(roomService.getPublicRoomsOnline(), HttpStatus.ACCEPTED);
         } catch (Exception ex) {

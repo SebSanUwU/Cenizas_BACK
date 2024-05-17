@@ -1,4 +1,4 @@
-package arsw.CenizasDelPasado.demo.persistence.exception;
+package arsw.cenizasdelpasado.demo.persistence.exception;
 
 public class UserPersistenceException extends Exception{
     public UserPersistenceException(String message) {

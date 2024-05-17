@@ -34,13 +34,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Java version
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: "termiun"
+          distribution: 'adopt'
 
       - name: Test with Maven
         run: mvn test
@@ -49,7 +50,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: ${{ github.workspace }}/target/*.jar
+
 
   deploy:
     runs-on: ubuntu-latest

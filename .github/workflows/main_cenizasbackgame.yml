@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
+          distribution: 'temurin'
 
       - name: Build with Maven and SonarQube Scan
         run: mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:sonar

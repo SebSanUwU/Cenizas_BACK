@@ -1,10 +1,5 @@
-package arsw.CenizasDelPasado.demo;
+package arsw.cenizasdelpasado.demo;
 
-import arsw.CenizasDelPasado.demo.persistence.LevelRepository;
-import arsw.CenizasDelPasado.demo.persistence.RoomRepository;
-import arsw.CenizasDelPasado.demo.persistence.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -12,18 +7,18 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import arsw.cenizasdelpasado.demo.persistence.LevelRepository;
+import arsw.cenizasdelpasado.demo.persistence.RoomRepository;
+import arsw.cenizasdelpasado.demo.persistence.UserRepository;
+
 @SpringBootApplication
 @EnableMongoRepositories
-public class CenizasDelPasadoApplication implements CommandLineRunner {
-	@Autowired
-	RoomRepository roomRepository;
+public class CenizasDelPasadoApplication {
 
-	@Autowired
-	UserRepository userRepository;
 
-	@Autowired
-	LevelRepository levelRepository;
+    public CenizasDelPasadoApplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
 
+    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(CenizasDelPasadoApplication.class, args);
@@ -39,15 +34,5 @@ public class CenizasDelPasadoApplication implements CommandLineRunner {
 						.allowedMethods("GET", "POST","PUT", "DELETE");
 			}
 		};
-	}
-
-
-	@Override
-	public void run(String... args) throws Exception {
-		/*
-		roomRepository.deleteAll();
-		userRepository.deleteAll();
-		levelRepository.deleteAll();*/
-
 	}
 }

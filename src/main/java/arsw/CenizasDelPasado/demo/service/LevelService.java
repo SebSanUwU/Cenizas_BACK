@@ -1,21 +1,19 @@
-package arsw.CenizasDelPasado.demo.service;
+package arsw.cenizasdelpasado.demo.service;
 
 
-import arsw.CenizasDelPasado.demo.model.LevelGame;
-import arsw.CenizasDelPasado.demo.model.enemys.Enemy;
-import arsw.CenizasDelPasado.demo.persistence.LevelRepository;
-import arsw.CenizasDelPasado.demo.persistence.exception.LevelException;
-import arsw.CenizasDelPasado.demo.persistence.exception.LevelPersistenceException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import arsw.cenizasdelpasado.demo.model.LevelGame;
+import arsw.cenizasdelpasado.demo.persistence.LevelRepository;
+import arsw.cenizasdelpasado.demo.persistence.exception.LevelException;
+import arsw.cenizasdelpasado.demo.persistence.exception.LevelPersistenceException;
 
 import java.util.List;
 
 @Service
 public class LevelService {
 
-    @Autowired
-    LevelRepository levelRepository;
+    private final LevelRepository levelRepository;
 
     public LevelService(LevelRepository levelRepository){
         this.levelRepository = levelRepository;
@@ -41,25 +39,17 @@ public class LevelService {
         return levelRepository.getLevelById(id);
     }
 
-    public List<Enemy> getEnemies(Long id) throws LevelException{
-        verifyLevelExists(id);
-        return levelRepository.getLevelById(id).getEnemies();
-    }
 
     //UPDATE
-    public void updateLevelEnemies(Long id,List<Enemy> enemies) throws LevelException {
-        verifyLevelExists(id);
-        levelRepository.updateLevelEnemies(id, enemies);
-    }
 
     public void updateLevelComplete(Long id, boolean complete) throws LevelException{
         verifyLevelExists(id);
         levelRepository.updateLevelComplete(id,complete);
     }
 
-    public void updateLevelNumObjects(Long id, int num_objects) throws LevelException{
+    public void updateLevelNumObjects(Long id, int numObjects) throws LevelException{
         verifyLevelExists(id);
-        levelRepository.updateLevelNumObjects(id, num_objects);
+        levelRepository.updateLevelNumObjects(id, numObjects);
     }
 
     //DELETE

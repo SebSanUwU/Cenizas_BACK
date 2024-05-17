@@ -1,10 +1,9 @@
-package arsw.CenizasDelPasado.demo.service;
+package arsw.cenizasdelpasado.demo.service;
 
-import arsw.CenizasDelPasado.demo.model.Room;
-import arsw.CenizasDelPasado.demo.persistence.RoomRepository;
-import arsw.CenizasDelPasado.demo.persistence.exception.RoomException;
-import arsw.CenizasDelPasado.demo.persistence.exception.RoomPersistenceException;
-import org.springframework.beans.factory.annotation.Autowired;
+import arsw.cenizasdelpasado.demo.persistence.exception.RoomException;
+import arsw.cenizasdelpasado.demo.model.Room;
+import arsw.cenizasdelpasado.demo.persistence.RoomRepository;
+import arsw.cenizasdelpasado.demo.persistence.exception.RoomPersistenceException;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -15,8 +14,8 @@ import java.util.List;
 @Service
 public class RoomService {
 
-    @Autowired
-    RoomRepository roomRepository;
+
+    private final RoomRepository roomRepository;
 
     public RoomService(RoomRepository rp) {
         this.roomRepository = rp;
@@ -24,14 +23,12 @@ public class RoomService {
     }
 
     void createUsers(){
-        System.out.println("Data creation started ROOMS ...");
         roomRepository.deleteAll();
         roomRepository.save(new Room(1L,"Among us",generateCode(),new Date(),Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"),new Room.RoomStats(15,1425,3),Arrays.asList(1L,2L),true,true));
         roomRepository.save(new Room(2L, "Minecraft", generateCode(), new Date(), Arrays.asList("amigo1@gmail.com", "amigo2@gmail.com"), new Room.RoomStats(20, 3000, 5), Arrays.asList(3L, 4L),true,true));
         roomRepository.save(new Room(3L, "Fortnite", generateCode(), new Date(), Arrays.asList("usuario1@gmail.com", "usuario2@gmail.com"), new Room.RoomStats(10, 500, 2), Arrays.asList(5L, 6L, 7L),true,false));
         roomRepository.save(new Room(4L, "League of Legends", generateCode(), new Date(), Arrays.asList("player1@gmail.com", "player2@gmail.com", "player3@gmail.com"), new Room.RoomStats(30, 7000, 10), Arrays.asList(8L),true,false));
         roomRepository.save(new Room(5L, "Call of Duty", generateCode(), new Date(), Arrays.asList("gamer1@gmail.com", "gamer2@gmail.com"), new Room.RoomStats(25, 4000, 8), Arrays.asList(9L, 10L, 11L),true,false));
-        System.out.println("Data creation ROOMS complete...");
     }
 
     //CREATE
@@ -66,7 +63,7 @@ public class RoomService {
 
     public List<String> getRoomUsers(String code) throws RoomException{
         verifyRoomExists(code);
-        return roomRepository.getRoomByCode(code).getUsers_in_room();
+        return roomRepository.getRoomByCode(code).getusersInRoom();
     }
 
     public List<Room> getPublicRoomsOnline(){
@@ -91,9 +88,9 @@ public class RoomService {
         roomRepository.updateRoomServerName(code,serverName);
     }
 
-    public void updateRoomUsers(String code,List<String> users_in_room) throws RoomException {
+    public void updateRoomUsers(String code,List<String> usersInRoom) throws RoomException {
         verifyRoomExists(code);
-        roomRepository.updateRoomUsersInRoom(code,users_in_room);
+        roomRepository.updateRoomUsersInRoom(code,usersInRoom);
     }
 
     public void updateRoomLevels(String code,List<Long> levels) throws RoomException {
@@ -117,18 +114,19 @@ public class RoomService {
 
     public String generateCode(){
         SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[20];
+        byte[] bytes = new byte[20];
         random.nextBytes(bytes);
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         String code = "";
         try {
             do {
-                code = "";
+                StringBuilder codeBuilder = new StringBuilder();
                 for (int i = 0; i < 7; i++) {
                     int indice = random.nextInt(caracteres.length());
                     char caracter = caracteres.charAt(indice);
-                    code += caracter;
+                    codeBuilder.append(caracter);
                 }
+                code = codeBuilder.toString();
                 verifyRoomExists(code);
             } while (verifyRoomExistsBreak(code));
         } catch (RoomException e) {
@@ -146,10 +144,7 @@ public class RoomService {
 
     public boolean verifyRoomExistsBreak(String code) throws RoomException{
         Room room = roomRepository.getRoomByCode(code);
-        if (room == null){
-            return false;
-        }
-        return true;
+        return room != null;
     }
 
     public void verifyRoomExists(Long id) throws RoomException{

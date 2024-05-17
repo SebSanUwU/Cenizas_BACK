@@ -1,22 +1,20 @@
-package arsw.CenizasDelPasado.demo.service;
+package arsw.cenizasdelpasado.demo.service;
 
-import arsw.CenizasDelPasado.demo.model.User;
-import arsw.CenizasDelPasado.demo.persistence.UserRepository;
-import arsw.CenizasDelPasado.demo.persistence.exception.UserException;
-import arsw.CenizasDelPasado.demo.persistence.exception.UserPersistenceException;
-import org.springframework.beans.factory.annotation.Autowired;
+import arsw.cenizasdelpasado.demo.model.User;
+import arsw.cenizasdelpasado.demo.persistence.UserRepository;
+import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
+import arsw.cenizasdelpasado.demo.persistence.exception.UserPersistenceException;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-    @Autowired
-    UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository){
         this.userRepository =  userRepository;
@@ -25,14 +23,12 @@ public class UserService {
 
     void createUsers(){
         userRepository.deleteAll();
-        System.out.println("Data creation started  USERS ...");
-        userRepository.save(new User(1L,"AlpinitoDeSandia","juancamargo@gmail.com",new User.GameStats(5,1000,12,15,2), List.of(new String[]{"ejemplo1@gmail.com", "ejemplo3@gmail.com"}), List.of(new String[]{"XTS1"})));
-        userRepository.save(new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3")));
-        userRepository.save(new User(3L, "UsuarioEjemplo2", "ejemplo2@gmail.com", new User.GameStats(10, 2000, 18, 30, 5), Arrays.asList("ejemplo1@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS1", "XTS3")));
-        userRepository.save(new User(4L, "UsuarioEjemplo3", "ejemplo3@gmail.com", new User.GameStats(3, 800, 8, 10, 1), Arrays.asList("ejemplo1@gmail.com", "ejemplo2@gmail.com"), Arrays.asList("XTS1", "XTS2")));
-        userRepository.save(new User(5L, "UsuarioEjemplo4", "ejemplo4@gmail.com", new User.GameStats(15, 3000, 25, 35, 7), Arrays.asList("ejemplo1@gmail.com", "ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS1", "XTS2", "XTS3")));
-        userRepository.save(new User(6L,"SEBASTIAN ZAMORA URREGO","millossebas@hotmail.es",new User.GameStats(0,0,0,0,0),Arrays.asList("ejemplo1@gmail.com"),Arrays.asList("XTS1", "XTS2", "XTS3")));
-        System.out.println("Data creation USERS complete...");
+        userRepository.save(new User(1L,"AlpinitoDeSandia","juancamargo@gmail.com",new User.GameStats(5,1000,12,15,2), List.of(), List.of()));
+        userRepository.save(new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList(), Arrays.asList("XTS2", "XTS3")));
+        userRepository.save(new User(3L, "UsuarioEjemplo2", "ejemplo2@gmail.com", new User.GameStats(10, 2000, 18, 30, 5), Arrays.asList(), Arrays.asList("XTS1", "XTS3")));
+        userRepository.save(new User(4L, "UsuarioEjemplo3", "ejemplo3@gmail.com", new User.GameStats(3, 800, 8, 10, 1), Arrays.asList(), Arrays.asList("XTS1", "XTS2")));
+        userRepository.save(new User(5L, "UsuarioEjemplo4", "ejemplo4@gmail.com", new User.GameStats(15, 3000, 25, 35, 7), Arrays.asList(), Arrays.asList("XTS1", "XTS2", "XTS3")));
+        userRepository.save(new User(6L,"SEBASTIAN ZAMORA URREGO","millossebas@hotmail.es",new User.GameStats(0,0,0,0,0),Arrays.asList(),Arrays.asList("XTS1", "XTS2", "XTS3")));
     }
 
     //CREATE
@@ -86,7 +82,7 @@ public class UserService {
         return allFriendRequests.stream()
                 .filter(request -> request.getState() == User.RequestState.PENDING)
                 .filter(request -> !Objects.equals(request.getSender(), mail))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<User.FriendRequest> getFriendRequestSendPending(String mail) throws  UserException{
@@ -95,7 +91,7 @@ public class UserService {
         return allFriendRequests.stream()
                 .filter(request -> request.getState() != User.RequestState.ACCEPTED)
                 .filter(request -> Objects.equals(request.getSender(), mail))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     //UPDATE
@@ -145,7 +141,7 @@ public class UserService {
                 sender.setState(User.RequestState.ACCEPTED);
                 receiver.setState(User.RequestState.ACCEPTED);
                 updateAddUserFriends(mail,friendMail);
-                updateAddUserFriends(friendMail,mail);
+                updateAddUserFriends(mail,friendMail);
             } else if (response.equals("refused")) {
                 sender.setState(User.RequestState.REFUSED);
                 receiver.setState(User.RequestState.REFUSED);

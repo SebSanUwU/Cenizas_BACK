@@ -1,4 +1,4 @@
-package arsw.CenizasDelPasado.demo.model;
+package arsw.cenizasdelpasado.demo.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
@@ -12,36 +12,36 @@ import java.util.*;
 public class Room {
     public static final int NUMBERPLAYERS = 5;
     @Id
-    private Long ID;
-    private String server_name;
+    private Long iD;
+    private String serverName;
     @Indexed(unique = true)
     private String code;
-    private Date creation_date;
-    private List<String> users_in_room;
+    private Date creationDate;
+    private List<String> usersInRoom;
     private RoomStats roomStats;
     private List<Long> levels;
     private boolean isPublic;
     private boolean online;
 
     @PersistenceCreator
-    public Room(Long ID, String server_name, String code, Date creation_date, List<String> users_in_room, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
-        this.ID = ID;
-        this.server_name = server_name;
+    public Room(Long iD, String serverName, String code, Date creationDate, List<String> usersInRoom, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
+        this.iD = iD;
+        this.serverName = serverName;
         this.code = code;
-        this.creation_date = creation_date;
-        this.users_in_room = users_in_room;
+        this.creationDate = creationDate;
+        this.usersInRoom = usersInRoom;
         this.roomStats = roomStats;
         this.levels = levels;
         this.isPublic = isPublic;
         this.online = online;
     }
 
-    public Room(String server_name, String code, boolean isPublic) {
-        this.ID = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        this.server_name = server_name;
+    public Room(String serverName, String code, boolean isPublic) {
+        this.iD = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        this.serverName = serverName;
         this.code = code;
-        this.creation_date = new Date();
-        this.users_in_room = new ArrayList<>(NUMBERPLAYERS);
+        this.creationDate = new Date();
+        this.usersInRoom = new ArrayList<>(NUMBERPLAYERS);
         this.roomStats = new RoomStats(0,0,0);
         this.levels = new ArrayList<>();
         this.isPublic = isPublic;
@@ -57,19 +57,19 @@ public class Room {
     }
 
     public Long getID() {
-        return ID;
+        return iD;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setID(Long iD) {
+        this.iD = iD;
     }
 
-    public String getServer_name() {
-        return server_name;
+    public String getserverName() {
+        return serverName;
     }
 
-    public void setServer_name(String server_name) {
-        this.server_name = server_name;
+    public void setserverName(String serverName) {
+        this.serverName = serverName;
     }
 
     public void setPublic(boolean aPublic) {
@@ -88,20 +88,20 @@ public class Room {
         this.code = code;
     }
 
-    public Date getCreation_date() {
-        return creation_date;
+    public Date getcreationDate() {
+        return creationDate;
     }
 
-    public void setCreation_date(Date creation_date) {
-        this.creation_date = creation_date;
+    public void setcreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public List<String> getUsers_in_room() {
-        return users_in_room;
+    public List<String> getusersInRoom() {
+        return usersInRoom;
     }
 
-    public void setUsers_in_room(List<String> users_in_room) {
-        this.users_in_room = users_in_room;
+    public void setusersInRoom(List<String> usersInRoom) {
+        this.usersInRoom = usersInRoom;
     }
 
     public RoomStats getRoomStats() {
@@ -135,11 +135,11 @@ public class Room {
     @Override
     public String toString() {
         return "Room{" +
-                "ID=" + ID +
-                ", server_name='" + server_name + '\'' +
+                "ID=" + iD +
+                ", serverName='" + serverName + '\'' +
                 ", code='" + code + '\'' +
-                ", creation_date=" + creation_date +
-                ", users_in_room=" + users_in_room +
+                ", creationDate=" + creationDate +
+                ", usersInRoom=" + usersInRoom +
                 ", roomStats=" + roomStats +
                 ", levels=" + levels +
                 ", isPublic=" + isPublic +
@@ -148,22 +148,22 @@ public class Room {
     }
 
     public static class RoomStats{
-        private int total_deaths;
+        private int totalDeaths;
         private int time;
-        private int objects_found;
+        private int objectsFound;
 
-        public RoomStats(int total_deaths, int time, int objects_found) {
-            this.total_deaths = total_deaths;
+        public RoomStats(int totalDeaths, int time, int objectsFound) {
+            this.totalDeaths = totalDeaths;
             this.time = time;
-            this.objects_found = objects_found;
+            this.objectsFound = objectsFound;
         }
 
-        public int getTotal_deaths() {
-            return total_deaths;
+        public int gettotalDeaths() {
+            return totalDeaths;
         }
 
-        public void setTotal_deaths(int total_deaths) {
-            this.total_deaths = total_deaths;
+        public void settotalDeaths(int totalDeaths) {
+            this.totalDeaths = totalDeaths;
         }
 
         public int getTime() {
@@ -174,20 +174,20 @@ public class Room {
             this.time = time;
         }
 
-        public int getObjects_found() {
-            return objects_found;
+        public int getobjectsFound() {
+            return objectsFound;
         }
 
-        public void setObjects_found(int objects_found) {
-            this.objects_found = objects_found;
+        public void setobjectsFound(int objectsFound) {
+            this.objectsFound = objectsFound;
         }
 
         @Override
         public String toString() {
             return "RoomStats{" +
-                    "total_deaths=" + total_deaths +
+                    "totalDeaths=" + totalDeaths +
                     ", time=" + time +
-                    ", objects_found=" + objects_found +
+                    ", objectsFound=" + objectsFound +
                     '}';
         }
     }

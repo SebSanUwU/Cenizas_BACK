@@ -1,4 +1,4 @@
-package arsw.cenizasdelpasado.demo.model;
+package arsw.CenizasDelPasado.demo.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;

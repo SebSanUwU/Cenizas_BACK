@@ -1,17 +1,16 @@
 package arsw.cenizasdelpasado.demo.controler;
 
 
-import arsw.cenizasdelpasado.demo.model.Room;
-import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
-import arsw.cenizasdelpasado.demo.service.RoomService;
-import arsw.cenizasdelpasado.demo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import arsw.cenizasdelpasado.demo.model.Room;
+import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
+import arsw.cenizasdelpasado.demo.service.RoomService;
+import arsw.cenizasdelpasado.demo.service.UserService;
 
 import java.util.List;
 import java.util.logging.Level;

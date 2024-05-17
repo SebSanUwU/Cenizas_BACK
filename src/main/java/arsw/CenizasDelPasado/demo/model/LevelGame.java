@@ -1,10 +1,7 @@
 package arsw.cenizasdelpasado.demo.model;
 
-import arsw.cenizasdelpasado.demo.model.enemys.Enemy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.List;
 
 @Document("Level")
 public class LevelGame {

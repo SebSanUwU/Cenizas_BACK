@@ -1,8 +1,8 @@
-package arsw.cenizasdelpasado.demo.controler;
+package arsw.CenizasDelPasado.demo.controler;
 
-import arsw.cenizasdelpasado.demo.model.User;
-import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
-import arsw.cenizasdelpasado.demo.service.UserService;
+import arsw.CenizasDelPasado.demo.service.UserService;
+import arsw.CenizasDelPasado.demo.model.User;
+import arsw.CenizasDelPasado.demo.persistence.exception.UserException;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

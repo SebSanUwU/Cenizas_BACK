@@ -1,8 +1,8 @@
-package arsw.cenizasdelpasado.demo.persistence;
+package arsw.CenizasDelPasado.demo.persistence;
 
 
-import arsw.cenizasdelpasado.demo.model.Room;
-import arsw.cenizasdelpasado.demo.persistence.exception.RoomException;
+import arsw.CenizasDelPasado.demo.model.Room;
+import arsw.CenizasDelPasado.demo.persistence.exception.RoomException;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.Update;

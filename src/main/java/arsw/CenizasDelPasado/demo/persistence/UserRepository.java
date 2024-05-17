@@ -1,8 +1,8 @@
-package arsw.cenizasdelpasado.demo.persistence;
+package arsw.CenizasDelPasado.demo.persistence;
 
 
-import arsw.cenizasdelpasado.demo.model.User;
-import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
+import arsw.CenizasDelPasado.demo.model.User;
+import arsw.CenizasDelPasado.demo.persistence.exception.UserException;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.Update;

@@ -1,11 +1,12 @@
 package arsw.cenizasdelpasado.demo.service;
 
 
+import org.springframework.stereotype.Service;
+
 import arsw.cenizasdelpasado.demo.model.LevelGame;
 import arsw.cenizasdelpasado.demo.persistence.LevelRepository;
 import arsw.cenizasdelpasado.demo.persistence.exception.LevelException;
 import arsw.cenizasdelpasado.demo.persistence.exception.LevelPersistenceException;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

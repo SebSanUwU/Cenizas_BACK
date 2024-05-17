@@ -2,7 +2,6 @@ package arsw.cenizasdelpasado.demo.controler;
 
 
 import arsw.cenizasdelpasado.demo.model.LevelGame;
-import arsw.cenizasdelpasado.demo.model.enemys.Enemy;
 import arsw.cenizasdelpasado.demo.persistence.exception.LevelException;
 import arsw.cenizasdelpasado.demo.persistence.exception.LevelPersistenceException;
 import arsw.cenizasdelpasado.demo.service.LevelService;
@@ -51,18 +50,6 @@ public class LevelAPIController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @Operation(summary = "Obtener enemigos de un nivel", description = "Este endpoint devuelve la lista de enemigos de un nivel específico basado en su ID. Estos enemigos seran un JSON del objeto enemigo")
-    @ApiResponse(responseCode = "202", description = "Lista de enemigos del nivel", content = @Content)
-    @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
-    @GetMapping(value = "/{id}/enemies")
-    public ResponseEntity<?> getLevelEnemies(@PathVariable("id") Long id){
-        try {
-            return new ResponseEntity<>(levelService.getEnemies(id), HttpStatus.ACCEPTED);
-        } catch (Exception e) {
-            Logger.getLogger(LevelGame.class.getName()).log(Level.SEVERE, null, e);
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
     @Operation(summary = "Crear un nuevo nivel", description = "Este endpoint permite crear un nuevo nivel.")
     @ApiResponse(responseCode = "201", description = "Nivel creado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear el nivel", content = @Content)
@@ -76,19 +63,7 @@ public class LevelAPIController {
             return new ResponseEntity<>( e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
-    @Operation(summary = "Actualizar enemigos de un nivel", description = "Este endpoint permite actualizar los enemigos de un nivel específico.")
-    @ApiResponse(responseCode = "202", description = "Enemigos actualizados exitosamente", content = @Content)
-    @ApiResponse(responseCode = "406", description = "No se pudo actualizar los enemigos", content = @Content)
-    @PutMapping(value = "/{id}/update-name")
-    public ResponseEntity<?> putLevelEnemies(@PathVariable("id") Long id,@RequestBody List<Enemy> enemeis){
-        try {
-            levelService.updateLevelEnemies(id,enemeis);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
-        } catch (LevelException e) {
-            Logger.getLogger(LevelGame.class.getName()).log(Level.SEVERE, null, e);
-            return new ResponseEntity<>( e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
+    
     @Operation(summary = "Actualizar estado de completitud de un nivel", description = "Este endpoint permite actualizar el estado de completitud de un nivel.")
     @ApiResponse(responseCode = "202", description = "Estado de completitud del nivel actualizado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo actualizar el estado de completitud del nivel", content = @Content)

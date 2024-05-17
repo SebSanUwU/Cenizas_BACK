@@ -1,16 +1,15 @@
-package arsw.cenizasdelpasado.demo.service;
+package arsw.CenizasDelPasado.demo.service;
 
-import arsw.cenizasdelpasado.demo.model.User;
-import arsw.cenizasdelpasado.demo.persistence.UserRepository;
-import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
-import arsw.cenizasdelpasado.demo.persistence.exception.UserPersistenceException;
+import arsw.CenizasDelPasado.demo.model.User;
+import arsw.CenizasDelPasado.demo.persistence.UserRepository;
+import arsw.CenizasDelPasado.demo.persistence.exception.UserException;
+import arsw.CenizasDelPasado.demo.persistence.exception.UserPersistenceException;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {

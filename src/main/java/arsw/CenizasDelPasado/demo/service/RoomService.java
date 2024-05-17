@@ -120,12 +120,13 @@ public class RoomService {
         String code = "";
         try {
             do {
-                code = "";
+                StringBuilder codeBuilder = new StringBuilder();
                 for (int i = 0; i < 7; i++) {
                     int indice = random.nextInt(caracteres.length());
                     char caracter = caracteres.charAt(indice);
-                    code += caracter;
+                    codeBuilder.append(caracter);
                 }
+                code = codeBuilder.toString();
                 verifyRoomExists(code);
             } while (verifyRoomExistsBreak(code));
         } catch (RoomException e) {

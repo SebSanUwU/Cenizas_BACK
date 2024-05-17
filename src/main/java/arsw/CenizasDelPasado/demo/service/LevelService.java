@@ -2,7 +2,6 @@ package arsw.cenizasdelpasado.demo.service;
 
 
 import arsw.cenizasdelpasado.demo.model.LevelGame;
-import arsw.cenizasdelpasado.demo.model.enemys.Enemy;
 import arsw.cenizasdelpasado.demo.persistence.LevelRepository;
 import arsw.cenizasdelpasado.demo.persistence.exception.LevelException;
 import arsw.cenizasdelpasado.demo.persistence.exception.LevelPersistenceException;
@@ -39,16 +38,8 @@ public class LevelService {
         return levelRepository.getLevelById(id);
     }
 
-    public List<Enemy> getEnemies(Long id) throws LevelException{
-        verifyLevelExists(id);
-        return levelRepository.getLevelById(id).getEnemies();
-    }
 
     //UPDATE
-    public void updateLevelEnemies(Long id,List<Enemy> enemies) throws LevelException {
-        verifyLevelExists(id);
-        levelRepository.updateLevelEnemies(id, enemies);
-    }
 
     public void updateLevelComplete(Long id, boolean complete) throws LevelException{
         verifyLevelExists(id);

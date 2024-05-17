@@ -14,9 +14,6 @@ public interface LevelRepository extends MongoRepository<LevelGame, Long>{
     LevelGame getLevelById(Long id) throws LevelException;
 
     @Query("{ID:?0}")
-    @Update("{ '$set' : { 'enemies' : ?1 } }")
-    void updateLevelEnemies(Long id,List<Enemy> enemies) throws LevelException;
-    @Query("{ID:?0}")
     @Update("{ '$set' : { 'complete' : ?1 } }")
     void updateLevelComplete(Long id,Boolean complete) throws LevelException;
     @Query("{ID:?0}")

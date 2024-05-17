@@ -52,7 +52,7 @@ class CenizasDelPasadoApplicationTests {
     @Test
     void saveLevel_WhenLevelDoesNotExist_ShouldSaveLevel() throws LevelException {
         // Arrange
-        LevelGame levelGame = new LevelGame(1L,"prueba",5,false,new ArrayList<>());
+        LevelGame levelGame = new LevelGame(1L,"prueba",5,false);
         when(levelRepository.getLevelById(anyLong())).thenReturn(null);
 
         // Act
@@ -62,7 +62,7 @@ class CenizasDelPasadoApplicationTests {
     @Test
     void saveLevel_WhenLevelExists_ShouldThrowException() throws LevelException {
         // Arrange
-        LevelGame levelGame = new LevelGame(1L,"prueba",5,false,new ArrayList<>());
+        LevelGame levelGame = new LevelGame(1L,"prueba",5,false);
         levelGame.setID(1L);
         when(levelRepository.getLevelById(1L)).thenReturn(new LevelGame(1L,"prueba2",5,false,new ArrayList<>()));
 

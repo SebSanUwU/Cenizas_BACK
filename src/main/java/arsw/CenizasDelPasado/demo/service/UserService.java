@@ -24,7 +24,7 @@ public class UserService {
 
     void createUsers(){
         userRepository.deleteAll();
-        userRepository.save(new User(1L,"AlpinitoDeSandia","juancamargo@gmail.com",new User.GameStats(5,1000,12,15,2), List.of(new String[]{}), List.of(new String[]{"XTS1"})));
+        userRepository.save(new User(1L,"AlpinitoDeSandia","juancamargo@gmail.com",new User.GameStats(5,1000,12,15,2), List.of(), List.of()));
         userRepository.save(new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList(), Arrays.asList("XTS2", "XTS3")));
         userRepository.save(new User(3L, "UsuarioEjemplo2", "ejemplo2@gmail.com", new User.GameStats(10, 2000, 18, 30, 5), Arrays.asList(), Arrays.asList("XTS1", "XTS3")));
         userRepository.save(new User(4L, "UsuarioEjemplo3", "ejemplo3@gmail.com", new User.GameStats(3, 800, 8, 10, 1), Arrays.asList(), Arrays.asList("XTS1", "XTS2")));
@@ -83,7 +83,7 @@ public class UserService {
         return allFriendRequests.stream()
                 .filter(request -> request.getState() == User.RequestState.PENDING)
                 .filter(request -> !Objects.equals(request.getSender(), mail))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<User.FriendRequest> getFriendRequestSendPending(String mail) throws  UserException{

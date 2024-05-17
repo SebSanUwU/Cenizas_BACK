@@ -65,6 +65,7 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.organization=sebzaur
           -Dsonar.projectKey=SebZaUr_Cenizas_BACK
+          -Dsonar.sonar.java.binaries=target/classes
 
   deploy:
     runs-on: ubuntu-latest

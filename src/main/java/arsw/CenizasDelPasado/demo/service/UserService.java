@@ -18,18 +18,10 @@ public class UserService {
 
     public UserService(UserRepository userRepository){
         this.userRepository =  userRepository;
-        createUsers();
+
     }
 
-    void createUsers(){
-        userRepository.deleteAll();
-        userRepository.save(new User(1L,"AlpinitoDeSandia","juancamargo@gmail.com",new User.GameStats(5,1000,12,15,2), List.of(), List.of()));
-        userRepository.save(new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList(), Arrays.asList("XTS2", "XTS3")));
-        userRepository.save(new User(3L, "UsuarioEjemplo2", "ejemplo2@gmail.com", new User.GameStats(10, 2000, 18, 30, 5), Arrays.asList(), Arrays.asList("XTS1", "XTS3")));
-        userRepository.save(new User(4L, "UsuarioEjemplo3", "ejemplo3@gmail.com", new User.GameStats(3, 800, 8, 10, 1), Arrays.asList(), Arrays.asList("XTS1", "XTS2")));
-        userRepository.save(new User(5L, "UsuarioEjemplo4", "ejemplo4@gmail.com", new User.GameStats(15, 3000, 25, 35, 7), Arrays.asList(), Arrays.asList("XTS1", "XTS2", "XTS3")));
-        userRepository.save(new User(6L,"SEBASTIAN ZAMORA URREGO","millossebas@hotmail.es",new User.GameStats(0,0,0,0,0),Arrays.asList(),Arrays.asList("XTS1", "XTS2", "XTS3")));
-    }
+
 
     //CREATE
     public void saveUser(User user) throws UserPersistenceException {

@@ -24,13 +24,13 @@ public class Room {
     private boolean online;
 
     @PersistenceCreator
-    public Room(Long iD, String serverName, String code, Date creationDate, List<String> usersInRoom, RoomStats roomStats, List<Long> levels, boolean isPublic,boolean online) {
+    public Room(Long iD, String serverName, String code, Date creationDate, List<String> usersInRoom, List<Long> levels, boolean isPublic,boolean online) {
         this.iD = iD;
         this.serverName = serverName;
         this.code = code;
         this.creationDate = creationDate;
         this.usersInRoom = usersInRoom;
-        this.roomStats = roomStats;
+        this.roomStats = new RoomStats(0,0,0);
         this.levels = levels;
         this.isPublic = isPublic;
         this.online = online;

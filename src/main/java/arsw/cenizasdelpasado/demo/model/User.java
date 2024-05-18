@@ -24,11 +24,11 @@ public class User {
     private List<String> rooms;
 
     @PersistenceCreator
-    public User(Long iD, String nickname, String mail, GameStats gameStats, List<String> friends, List<String> rooms) {
+    public User(Long iD, String nickname, String mail, List<String> friends, List<String> rooms) {
         this.iD = iD;
         this.nickname = nickname;
         this.mail = mail;
-        this.gameStats = gameStats;
+        this.gameStats = new GameStats(0,0,0,0,0);
         this.friends = friends;
         this.rooms = rooms;
         this.friendRequest = new ArrayList<>();

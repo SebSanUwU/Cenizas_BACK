@@ -47,7 +47,7 @@ class CenizasDelPasadoApplicationTests {
     @Test
     void testSaveUser_NewUser() throws UserException {
         // Prepare
-        User newUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
+        User newUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
         when(userRepository.getUserById(newUser.getID())).thenReturn(null);
         when(userRepository.getUserByMail(newUser.getMail())).thenReturn(null);
 
@@ -64,8 +64,8 @@ class CenizasDelPasadoApplicationTests {
     void testShowAllUsers() {
         // Prepare
         List<User> userList = new ArrayList<>();
-        userList.add(new User(1L,"AlpinitoDeSandia","juancamargo@gmail.com",new User.GameStats(5,1000,12,15,2), List.of(new String[]{"ejemplo1@gmail.com", "ejemplo3@gmail.com"}), List.of(new String[]{"XTS1"})));
-        userList.add(new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3")));
+        userList.add(new User(1L,"AlpinitoDeSandia","juancamargo@gmail.com", List.of(new String[]{"ejemplo1@gmail.com", "ejemplo3@gmail.com"}), List.of(new String[]{"XTS1"})));
+        userList.add(new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3")));
         when(userRepository.findAll()).thenReturn(userList);
 
         // Verify and assert
@@ -78,7 +78,7 @@ class CenizasDelPasadoApplicationTests {
     void testGetUser_ExistingUser() throws UserException {
         // Prepare
         String mail = "example@example.com";
-        User existingUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
+        User existingUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
         when(userRepository.getUserByMail(mail)).thenReturn(existingUser);
 
         // Verify and assert
@@ -104,7 +104,7 @@ class CenizasDelPasadoApplicationTests {
     void testGetUserGameStats_ExistingUser() throws UserException {
         // Prepare
         String mail = "example@example.com";
-        User existingUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", new User.GameStats(8, 1500, 20, 25, 3), Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
+        User existingUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
         when(userRepository.getUserByMail(mail)).thenReturn(existingUser);
 
         // Verify and assert
@@ -131,7 +131,7 @@ class CenizasDelPasadoApplicationTests {
         // Prepare
         String mail = "example@example.com";
         String newNickname = "NewNickname";
-        User existingUser = new User(3L, newNickname, mail, new User.GameStats(10, 2000, 18, 30, 5), Arrays.asList("ejemplo1@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS1", "XTS3"));
+        User existingUser = new User(3L, newNickname, mail, Arrays.asList("ejemplo1@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS1", "XTS3"));
         when(userRepository.getUserByMail(mail)).thenReturn(existingUser);
 
         // Verify and assert

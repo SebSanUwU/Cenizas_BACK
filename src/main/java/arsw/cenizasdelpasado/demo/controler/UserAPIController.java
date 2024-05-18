@@ -59,18 +59,7 @@ public class UserAPIController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
-    @Operation(summary = "Obtener estadísticas de juego de un usuario", description = "Este endpoint devuelve las estadísticas de juego de un usuario basado en su dirección de correo electrónico.")
-    @ApiResponse(responseCode = "200", description = "Estadísticas de juego del usuario como JSON del objeto GameStats", content = @Content)
-    @ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content)
-    @GetMapping("/{mail}/game-stats")
-    public ResponseEntity<Object> getUserGameStats(@PathVariable("mail") String mail){
-        try {
-            return new ResponseEntity<>(userService.getUserGameStats(mail), HttpStatus.ACCEPTED);
-        } catch (UserException e) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, e);
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
+
     @Operation(summary = "Obtener salas de un usuario", description = "Este endpoint devuelve las salas de un usuario basado en su dirección de correo electrónico.")
     @ApiResponse(responseCode = "200", description = "Lista de salas del usuario", content = @Content)
     @ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content)

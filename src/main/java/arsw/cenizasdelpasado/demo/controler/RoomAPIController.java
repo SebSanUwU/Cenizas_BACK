@@ -52,18 +52,7 @@ public class RoomAPIController {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
-    @Operation(summary = "Obtener estadísticas de una sala", description = "Este endpoint devuelve las estadísticas de una sala basada en su código como unJSON del objeto RoomStats.")
-    @ApiResponse(responseCode = "302", description = "Estadísticas de la sala", content = @Content)
-    @ApiResponse(responseCode = "404", description = "Sala no encontrada", content = @Content)
-    @GetMapping(value = "/{code}/room-stats")
-    public ResponseEntity<Object> getRoomStats(@PathVariable("code") String code) {
-        try {
-            return new ResponseEntity<>(roomService.getRoomStats(code), HttpStatus.ACCEPTED);
-        } catch (Exception ex) {
-            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
+
     @Operation(summary = "Obtener usuarios de una sala", description = "Este endpoint devuelve la lista de usuarios de una sala basada en su código.")
     @ApiResponse(responseCode = "302", description = "Usuarios en la sala", content = @Content)
     @ApiResponse(responseCode = "404", description = "Sala no encontrada", content = @Content)

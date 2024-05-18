@@ -20,9 +20,7 @@ public interface RoomRepository extends MongoRepository<Room, Long> {
     @Query("{code:?0}")
     @Update("{ '$set' : { 'serverName' : ?1 } }")
     void updateRoomServerName(String code,String serverName) throws RoomException;
-    @Query("{code:?0}")
-    @Update("{ '$set' : { 'roomStats' : ?1 } }")
-    void updateRoomStats(String code, Room.RoomStats roomStats) throws RoomException;
+
     @Query("{code:?0}")
     @Update("{ '$set' : { 'usersInRoom' : ?1 } }")
     void updateRoomUsersInRoom(String code,List<String> usersInRoom) throws RoomException;

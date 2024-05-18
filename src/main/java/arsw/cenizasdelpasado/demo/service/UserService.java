@@ -45,10 +45,6 @@ public class UserService {
         return userRepository.getUserByMail(mail);
     }
 
-    public User.GameStats getUserGameStats(String mail) throws UserException {
-        verifyUserExists(mail);
-        return userRepository.getUserByMail(mail).getGameStats();
-    }
 
     public List<String> getUserFriends(String mail) throws UserException {
         verifyUserExists(mail);

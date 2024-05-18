@@ -18,9 +18,6 @@ public interface UserRepository extends MongoRepository<User, Long> {
     @Update("{ '$set' : { 'nickname' : ?1 } }")
     void updateUserNickname(String mail,String nickname) throws UserException;
     @Query("{ 'mail' : ?0 }")
-    @Update("{ '$set' : { 'gameStats' : ?1 } }")
-    void updateUserGameStats(String mail,User.GameStats gameStats) throws UserException;
-    @Query("{ 'mail' : ?0 }")
     @Update("{ '$set' : { 'friends' : ?1 } }")
     void updateUserFriends(String mail,List<String> friends) throws UserException;
     @Query("{ 'mail' : ?0 }")

@@ -45,10 +45,6 @@ public class RoomService {
         return roomRepository.getRoomByCode(code);
     }
 
-    public Room.RoomStats getRoomStats(String code) throws RoomException {
-        verifyRoomExists(code);
-        return roomRepository.getRoomByCode(code).getRoomStats();
-    }
 
     public List<String> getRoomUsers(String code) throws RoomException{
         verifyRoomExists(code);

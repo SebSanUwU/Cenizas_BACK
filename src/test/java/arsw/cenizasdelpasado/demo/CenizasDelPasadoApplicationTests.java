@@ -100,31 +100,9 @@ class CenizasDelPasadoApplicationTests {
         assertEquals("USER ERROR: User not found " + mail, exception.getMessage());
     }
 
-    @Test
-    void testGetUserGameStats_ExistingUser() throws UserException {
-        // Prepare
-        String mail = "example@example.com";
-        User existingUser = new User(2L, "UsuarioEjemplo1", "ejemplo1@gmail.com", Arrays.asList("ejemplo2@gmail.com", "ejemplo3@gmail.com"), Arrays.asList("XTS2", "XTS3"));
-        when(userRepository.getUserByMail(mail)).thenReturn(existingUser);
 
-        // Verify and assert
-        User.GameStats gameStats = userService.getUserGameStats(mail);
-        assertNotNull(gameStats);
-        // Añade más aserciones según corresponda
-    }
 
-    @Test
-    void testGetUserGameStats_NonExistingUser() throws UserException {
-        // Prepare
-        String mail = "nonexisting@example.com";
-        when(userRepository.getUserByMail(mail)).thenReturn(null);
 
-        // Verify and assert
-        UserException exception = assertThrows(UserException.class, () -> {
-            userService.getUserGameStats(mail);
-        });
-        assertEquals("USER ERROR: User not found " + mail, exception.getMessage());
-    }
 
     @Test
     void testUpdateUserNickname_ExistingUser() throws UserException {

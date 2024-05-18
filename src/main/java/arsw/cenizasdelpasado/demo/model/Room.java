@@ -18,7 +18,6 @@ public class Room {
     private String code;
     private Date creationDate;
     private List<String> usersInRoom;
-    private RoomStats roomStats;
     private List<Long> levels;
     private boolean isPublic;
     private boolean online;
@@ -30,7 +29,6 @@ public class Room {
         this.code = code;
         this.creationDate = creationDate;
         this.usersInRoom = usersInRoom;
-        this.roomStats = new RoomStats(0,0,0);
         this.levels = levels;
         this.isPublic = isPublic;
         this.online = online;
@@ -42,7 +40,6 @@ public class Room {
         this.code = code;
         this.creationDate = new Date();
         this.usersInRoom = new ArrayList<>(NUMBERPLAYERS);
-        this.roomStats = new RoomStats(0,0,0);
         this.levels = new ArrayList<>();
         this.isPublic = isPublic;
         this.online = false;
@@ -104,13 +101,6 @@ public class Room {
         this.usersInRoom = usersInRoom;
     }
 
-    public RoomStats getRoomStats() {
-        return roomStats;
-    }
-
-    public void setRoomStats(RoomStats roomStats) {
-        this.roomStats = roomStats;
-    }
 
     public List<Long> getLevels() {
         return levels;
@@ -140,55 +130,10 @@ public class Room {
                 ", code='" + code + '\'' +
                 ", creationDate=" + creationDate +
                 ", usersInRoom=" + usersInRoom +
-                ", roomStats=" + roomStats +
+
                 ", levels=" + levels +
                 ", isPublic=" + isPublic +
                 ", online=" + online +
                 '}';
-    }
-
-    public static class RoomStats{
-        private int totalDeaths;
-        private int time;
-        private int objectsFound;
-
-        public RoomStats(int totalDeaths, int time, int objectsFound) {
-            this.totalDeaths = totalDeaths;
-            this.time = time;
-            this.objectsFound = objectsFound;
-        }
-
-        public int gettotalDeaths() {
-            return totalDeaths;
-        }
-
-        public void settotalDeaths(int totalDeaths) {
-            this.totalDeaths = totalDeaths;
-        }
-
-        public int getTime() {
-            return time;
-        }
-
-        public void setTime(int time) {
-            this.time = time;
-        }
-
-        public int getobjectsFound() {
-            return objectsFound;
-        }
-
-        public void setobjectsFound(int objectsFound) {
-            this.objectsFound = objectsFound;
-        }
-
-        @Override
-        public String toString() {
-            return "RoomStats{" +
-                    "totalDeaths=" + totalDeaths +
-                    ", time=" + time +
-                    ", objectsFound=" + objectsFound +
-                    '}';
-        }
     }
 }

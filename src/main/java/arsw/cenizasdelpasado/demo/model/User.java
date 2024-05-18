@@ -18,7 +18,7 @@ public class User {
     private String nickname;
     @Indexed(unique = true)
     private String mail;
-    private GameStats gameStats;
+
     private List<FriendRequest> friendRequest;
     private List<String> friends;
     private List<String> rooms;
@@ -28,7 +28,6 @@ public class User {
         this.iD = iD;
         this.nickname = nickname;
         this.mail = mail;
-        this.gameStats = new GameStats(0,0,0,0,0);
         this.friends = friends;
         this.rooms = rooms;
         this.friendRequest = new ArrayList<>();
@@ -38,7 +37,6 @@ public class User {
         this.iD = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         this.nickname = nickname;
         this.mail = mail;
-        this.gameStats = new GameStats(0,0,0,0,0);
         this.friendRequest = new ArrayList<>();
         this.friends = new ArrayList<>();
         this.rooms = new ArrayList<>();
@@ -77,14 +75,6 @@ public class User {
         this.mail = mail;
     }
 
-    public GameStats getGameStats() {
-        return gameStats;
-    }
-
-    public void setGameStats(GameStats gameStats) {
-        this.gameStats = gameStats;
-    }
-
     public List<String> getFriends() {
         return friends;
     }
@@ -107,80 +97,12 @@ public class User {
                 "ID=" + iD +
                 ", nickname='" + nickname + '\'' +
                 ", mail='" + mail + '\'' +
-                ", gameStats=" + gameStats +
                 ", friendRequest=" + friendRequest +
                 ", friends=" + friends +
                 ", rooms=" + rooms +
                 '}';
     }
 
-    public static class GameStats{
-        private int lid;
-        private int totalScore;
-        private int objectsFound;
-        private int numDeaths;
-        private int gamesPlayed;
-
-        public GameStats(int lid, int totalScore, int objectsFound, int numDeaths, int gamesPlayed) {
-            this.lid = lid;
-            this.totalScore = totalScore;
-            this.objectsFound = objectsFound;
-            this.numDeaths = numDeaths;
-            this.gamesPlayed = gamesPlayed;
-        }
-
-        public int getLid() {
-            return lid;
-        }
-
-        public void setLid(int lid) {
-            this.lid = lid;
-        }
-
-        public int gettotalScore() {
-            return totalScore;
-        }
-
-        public void settotalScore(int totalScore) {
-            this.totalScore = totalScore;
-        }
-
-        public int getobjectsFound() {
-            return objectsFound;
-        }
-
-        public void setobjectsFound(int objectsFound) {
-            this.objectsFound = objectsFound;
-        }
-
-        public int getnumDeaths() {
-            return numDeaths;
-        }
-
-        public void setnumDeaths(int numDeaths) {
-            this.numDeaths = numDeaths;
-        }
-
-        public int getgamesPlayed() {
-            return gamesPlayed;
-        }
-
-        public void setgamesPlayed(int gamesPlayed) {
-            this.gamesPlayed = gamesPlayed;
-        }
-
-
-        @Override
-        public String toString() {
-            return "GameStats{" +
-                    "lid=" + lid +
-                    ", totalScore=" + totalScore +
-                    ", objectsFound=" + objectsFound +
-                    ", numDeaths=" + numDeaths +
-                    ", gamesPlayed=" + gamesPlayed +
-                    '}';
-        }
-    }
     public static class FriendRequest {
         private String sender;
         private String receiver;

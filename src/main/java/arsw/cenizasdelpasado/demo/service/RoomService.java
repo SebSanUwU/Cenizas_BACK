@@ -20,7 +20,6 @@ public class RoomService {
     }
 
 
-
     //CREATE
     public void saveRoom(Room room) throws RoomPersistenceException {
         try {

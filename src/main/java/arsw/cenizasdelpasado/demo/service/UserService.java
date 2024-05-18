@@ -20,8 +20,6 @@ public class UserService {
 
     }
 
-
-
     //CREATE
     public void saveUser(User user) throws UserPersistenceException {
         try {

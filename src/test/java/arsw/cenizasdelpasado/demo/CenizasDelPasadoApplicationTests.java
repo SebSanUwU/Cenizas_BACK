@@ -1,13 +1,9 @@
 package arsw.cenizasdelpasado.demo;
 
-import arsw.cenizasdelpasado.demo.model.LevelGame;
 import arsw.cenizasdelpasado.demo.model.Room;
 import arsw.cenizasdelpasado.demo.model.User;
-import arsw.cenizasdelpasado.demo.persistence.LevelRepository;
 import arsw.cenizasdelpasado.demo.persistence.RoomRepository;
 import arsw.cenizasdelpasado.demo.persistence.UserRepository;
-import arsw.cenizasdelpasado.demo.persistence.exception.LevelException;
-import arsw.cenizasdelpasado.demo.persistence.exception.LevelPersistenceException;
 import arsw.cenizasdelpasado.demo.persistence.exception.RoomException;
 import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
 import arsw.cenizasdelpasado.demo.service.*;
@@ -26,8 +22,6 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class CenizasDelPasadoApplicationTests {
     @Mock
-    private LevelRepository levelRepository;
-    @Mock
     private RoomRepository roomRepository;
     @Mock
     private UserRepository userRepository;
@@ -36,52 +30,6 @@ class CenizasDelPasadoApplicationTests {
     private UserService userService;
     @InjectMocks
     private RoomService roomService;
-
-    @InjectMocks
-    private LevelService levelService;
-
-    @Test
-    void testVerifyLevelExists_NotFound() throws LevelException{
-        LevelService service = mock(LevelService.class);
-        LevelRepository mockRepo = mock(LevelRepository.class);
-        when(mockRepo.getLevelById(1L)).thenReturn(null);
-        service.verifyLevelExists(1L);
-    }
-
-
-    @Test
-    void saveLevel_WhenLevelDoesNotExist_ShouldSaveLevel() throws LevelException {
-        // Arrange
-        LevelGame levelGame = new LevelGame(1L,"prueba",5,false);
-        when(levelRepository.getLevelById(anyLong())).thenReturn(null);
-
-        // Act
-        assertDoesNotThrow(() -> levelService.saveLevel(levelGame));
-    }
-
-    @Test
-    void saveLevel_WhenLevelExists_ShouldThrowException() throws LevelException {
-        // Arrange
-        LevelGame levelGame = new LevelGame(1L,"prueba",5,false);
-        levelGame.setID(1L);
-        when(levelRepository.getLevelById(1L)).thenReturn(new LevelGame(1L,"prueba2",5,false));
-
-        // Act & Assert
-        assertThrows(LevelPersistenceException.class, () -> levelService.saveLevel(levelGame));
-    }
-
-    @Test
-    void showAllLevels_ShouldReturnAllLevels() {
-        // Arrange
-        List<LevelGame> levels = new ArrayList<>();
-        when(levelRepository.findAll()).thenReturn(levels);
-
-        // Act
-        List<LevelGame> result = levelService.showAllLevels();
-
-        // Assert
-        assertSame(levels, result);
-    }
 
     @Test
     void saveRoom_WhenRoomDoesNotExist_ShouldSaveRoom() throws RoomException {
@@ -95,8 +43,6 @@ class CenizasDelPasadoApplicationTests {
         // Assert
         verify(roomRepository, times(1)).save(room);
     }
-
-
 
     @Test
     void testSaveUser_NewUser() throws UserException {
@@ -211,5 +157,4 @@ class CenizasDelPasadoApplicationTests {
         // Asegúrate de que userRepository.updateUserNickname() no se llame
         verify(userRepository, never()).updateUserNickname(any(), any());
     }
-
 }

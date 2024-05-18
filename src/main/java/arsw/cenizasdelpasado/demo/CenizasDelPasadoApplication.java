@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import arsw.cenizasdelpasado.demo.persistence.LevelRepository;
 import arsw.cenizasdelpasado.demo.persistence.RoomRepository;
 import arsw.cenizasdelpasado.demo.persistence.UserRepository;
 
@@ -16,7 +15,7 @@ import arsw.cenizasdelpasado.demo.persistence.UserRepository;
 public class CenizasDelPasadoApplication {
 
 
-    public CenizasDelPasadoApplication(RoomRepository roomRepository, UserRepository userRepository, LevelRepository levelRepository){
+    public CenizasDelPasadoApplication(RoomRepository roomRepository, UserRepository userRepository){
 
     }
 

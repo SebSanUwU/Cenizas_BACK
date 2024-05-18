@@ -6,7 +6,6 @@ import arsw.cenizasdelpasado.demo.persistence.exception.UserException;
 import arsw.cenizasdelpasado.demo.persistence.exception.UserPersistenceException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

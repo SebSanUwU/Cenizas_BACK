@@ -83,19 +83,7 @@ public class UserAPIController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
-    @Operation(summary = "Crear un nuevo usuario por inyección", description = "Este endpoint permite crear un nuevo usuario con un body que tenga toda la información del usuario.")
-    @ApiResponse(responseCode = "201", description = "Usuario creado exitosamente", content = @Content)
-    @ApiResponse(responseCode = "406", description = "No se pudo crear el usuario", content = @Content)
-    @PostMapping
-    public ResponseEntity<Object> protocolPostUser(@RequestBody User user){
-        try{
-            userService.saveUser(user);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
-        } catch(Exception ex){
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
+
     @Operation(summary = "Crear un nuevo usuario desde cero con correo y apodo", description = "Este endpoint permite crear un nuevo usuario con correo electrónico y apodo, generando todos sus valores iniciales automaticamente.")
     @ApiResponse(responseCode = "201", description = "Usuario creado exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear el usuario", content = @Content)

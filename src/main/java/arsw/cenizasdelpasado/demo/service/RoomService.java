@@ -7,8 +7,6 @@ import arsw.cenizasdelpasado.demo.persistence.exception.RoomPersistenceException
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Service

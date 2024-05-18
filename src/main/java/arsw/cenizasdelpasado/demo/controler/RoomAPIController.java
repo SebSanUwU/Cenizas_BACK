@@ -88,19 +88,7 @@ public class RoomAPIController {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
-    @Operation(summary = "Crear una nueva sala por inyección", description = "Este endpoint permite crear una nueva sala, recibiendo un body con todos los parametros para la sala")
-    @ApiResponse(responseCode = "201", description = "Sala creada exitosamente", content = @Content)
-    @ApiResponse(responseCode = "406", description = "No se pudo crear la sala", content = @Content)
-    @PostMapping
-    public ResponseEntity<Object> protocolPostRoom(@RequestBody Room room){
-        try{
-            roomService.saveRoom(room);
-            return new ResponseEntity<>(room,HttpStatus.ACCEPTED);
-        } catch(Exception ex){
-            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>( ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
+
     @Operation(summary = "Crear una nueva sala desde cero con nombre de servidor", description = "Este endpoint permite crear una nueva sala con un nombre de servidor creando los demas parametros automaticamente.")
     @ApiResponse(responseCode = "201", description = "Sala creada exitosamente", content = @Content)
     @ApiResponse(responseCode = "406", description = "No se pudo crear la sala", content = @Content)
